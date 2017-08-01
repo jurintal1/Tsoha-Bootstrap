@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa reseptiä Gin Tonic</h1>
+
+  <form>    
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" class="form-control" value="Gin Tonic">
+    </div>
+    <div class="form-group">
+      <label>Lasi</label>
+      <input type="text" class="form-control" value="High Ball">
+    </div>
+    <div class="form-group">
+      <label>Valmistustapa</label>
+      <input type="text" class="form-control" value="rakennetaan">
+    </div>
+    <div class="form-group">
+      <label>Ohje</label>
+      <textarea class="form-control">
+      Täytä lasi puolilleen jäitä, lisää gini ja pidennä tonic-vedellä. Purista joukkoon muutaman limeviipaleen mehut ja pudota viipaleet lasiin koristeeksi.
+      </textarea>
+    </div>
+    <h3>Ainesosat</h3>
+    <div class="form-inline">
+      <input type="text" class="form-control" value="gin">
+      <input type="text" class="form-control" value="12 cl">
+    </div>
+    <div class="form-inline">
+      <input type="text" class="form-control" value="tonic">
+      <input type="text" class="form-control" value="12 cl">
+    </div>
+    <div class="form-inline">
+      <input type="text" class="form-control" value="lime">
+      <input type="text" class="form-control" value="0,25">
+    </div>
+    <p>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}
