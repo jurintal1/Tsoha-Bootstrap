@@ -7,4 +7,14 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Drinkkireseptitietokanta ja web-sovelllus, jossa voi hakea reseptejä. Kirjautuneet käyttäjät voivat myös lisätä uusia reseptejä.
+Drinkkireseptitietokanta ja web-sovellus, jossa voi hakea reseptejä. Kirjautuneet käyttäjät voivat myös lisätä uusia reseptejä.
+
+## Suunnitellut sivunäkymät
+
+* [Etusivu](https://jurintal.users.cs.helsinki.fi/drinkit/etusivu.html)
+* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti.html)
+* [Listaus](https://jurintal.users.cs.helsinki.fi/drinkit/lista.html)
+* [Muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaus.html)
+
+
+
