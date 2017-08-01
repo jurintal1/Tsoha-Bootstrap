@@ -11,10 +11,10 @@ Drinkkireseptitietokanta ja web-sovellus, jossa voi hakea reseptejä. Kirjautune
 
 ## Suunnitellut sivunäkymät
 
-* [Etusivu](https://jurintal.users.cs.helsinki.fi/drinkit/etusivu.html)
-* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti.html)
-* [Listaus](https://jurintal.users.cs.helsinki.fi/drinkit/lista.html)
-* [Muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaus.html)
+* [Etusivu](https://jurintal.users.cs.helsinki.fi/drinkit/etusivu)
+* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti)
+* [Listaus](https://jurintal.users.cs.helsinki.fi/drinkit/lista)
+* [Muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaus)
 
 
 
