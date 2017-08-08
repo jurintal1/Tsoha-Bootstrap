@@ -9,17 +9,23 @@
   });
 
   $routes->get('/resepti', function() {
-    HelloWorldController::resepti();
+    HelloWorldController::recipe();
   });
 
-  $routes->get('/lista', function() {
-    HelloWorldController::lista();
+  $routes->get('/reseptilista', function() {
+    HelloWorldController::listRecipes();
   });
 
-  $routes->get('/muokkaa', function() {
-    HelloWorldController::muokkaa();
+  $routes->get('/reseptilista', function() {
+    HelloWorldController::listUsers();
   });
 
-  $routes->get('/etusivu', function() {
-    HelloWorldController::etusivu();
+  $routes->get('/muokkaa_reseptia', function() {
+    HelloWorldController::editRecipe();
   });
+
+  $routes->get('/muokkaa_kayttajaa', function() {
+    HelloWorldController::editUser();
+  });
+
+

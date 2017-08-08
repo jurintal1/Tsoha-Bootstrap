@@ -1,7 +1,44 @@
-INSERT INTO Kayttaja (nimi, salasana, oikeustaso) VALUES ('Jussi', 'kaakkuri', '0');
-INSERT INTO Resepti (laatija, nimi, lisaysaika) 
-	VALUES ((SELECT id FROM Kayttaja WHERE nimi = 'Jussi'), 'Pelkkä piimä', now());
-INSERT INTO Ainesosa (nimi)  VALUES ('piimä');
-INSERT INTO ReseptiAines (resepti_id, ainesosa_id)
-	VALUES ((SELECT id FROM Resepti WHERE nimi = 'Pelkkä piimä'),
-			(SELECT id FROM Ainesosa WHERE nimi = 'piimä'));
+INSERT INTO UserAccount (name, password, role) VALUES ('Jussi', 'kaakkuri', '0');
+INSERT INTO UserAccount (name, password, role) VALUES ('Sirpa', 'laama', '1');
+INSERT INTO UserAccount (name, password, role, active) VALUES ('Sorsa', 'hanhi', '0', true);
+
+INSERT INTO Recipe (author, name, timeAdded) 
+	VALUES ((SELECT id FROM UserAccount WHERE name = 'Jussi'), 'Pelkkä piimä', now());
+INSERT INTO Recipe (author, name, timeAdded) 
+	VALUES ((SELECT id FROM UserAccount WHERE name = 'Sirpa'), 'Margarita', now());
+INSERT INTO Recipe (author, name, timeAdded, glass, method, instructions) 
+	VALUES ((SELECT id FROM UserAccount WHERE name = 'Sorsa'), 'Whisky Sour', now(),
+	 'On the rocks', 'ravistettu',
+	 'Kaada ainekset jääpaloilla täytettyyn ravistimeen. Ravista voimakkaasti. 
+	 Kaada On the Rocks tai sour -lasiin.Koristele appelsiiniviipaleella
+	 ja maraschinokirsikalla.');
+
+
+INSERT INTO Ingredient (name)  VALUES ('ruisviski');
+INSERT INTO Ingredient (name)  VALUES ('sitruunamehu');
+INSERT INTO Ingredient (name)  VALUES ('piimä');
+INSERT INTO Ingredient (name)  VALUES ('appelsiini');
+INSERT INTO Ingredient (name)  VALUES ('cocktailkirsikka');
+
+
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Pelkkä piimä'),
+			(SELECT id FROM Ingredient WHERE name = 'piimä'));
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id, quantity)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Whisky Sour'),
+			(SELECT id FROM Ingredient WHERE name = 'ruisviski'),
+			'4,5 cl');
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id, quantity)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Whisky Sour'),
+			(SELECT id FROM Ingredient WHERE name = 'sitruunamehu'),
+			' cl');
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id, quantity)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Whisky Sour'),
+			(SELECT id FROM Ingredient WHERE name = 'sokerisiirappi'),
+			'1 cl');
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Whisky Sour'),
+			(SELECT id FROM Ingredient WHERE name = 'appelsiini'));
+INSERT INTO RecipeIngredient (recipe_id, ingredient_id)
+	VALUES ((SELECT id FROM Recipe WHERE name = 'Whisky Sour'),
+			(SELECT id FROM Ingredient WHERE name = 'cocktailkirsikka'));

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa käyttäjää Jussi</h1>
+
+  <form>    
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" class="form-control" value="Jussi">
+    </div>
+    
+    <div class="form-group">
+      <label>salasana</label>
+      <input type="text" class="form-control" value="haahka">
+    </div>
+    
+    <div class="btn-group">
+      <label>käyttäjärooli</label>
+        <input type="checkbox"
+    </div>
+
+    <div class="radio">
+      <label>
+        <input type="radio" name="optradio">Peruskäyttäjä</label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optradio">Admin-käyttäjä</label>
+    </div>
+
+
+    <div class="btn-group">
+      <label class="btn btn-default">
+        <input type="checkbox">aktiivinen
+    </label>
+    
+
+    <div class="btn-group-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

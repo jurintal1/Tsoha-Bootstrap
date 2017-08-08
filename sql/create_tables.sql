@@ -1,26 +1,28 @@
-CREATE TABLE Kayttaja(
-id SERIAL PRIMARY KEY,
-nimi varchar(50) UNIQUE NOT NULL,
-salasana varchar(50) UNIQUE NOT NULL,
-oikeustaso integer NOT NULL CHECK(oikeustaso < 2)
+CREATE TABLE UserAccount(
+id serial PRIMARY KEY,
+name varchar(50) UNIQUE NOT NULL,
+password varchar(50) UNIQUE NOT NULL,
+role integer NOT NULL CHECK(role < 2),
+active boolean DEFAULT false NOT NULL
 );
 
-CREATE TABLE Resepti(
-id SERIAL PRIMARY KEY,
-laatija integer REFERENCES Kayttaja(id),
-nimi varchar(50) UNIQUE NOT NULL,
-lisaysaika timestamp NOT NULL,
-ohje varchar(1000),
-lasi varchar(50),
-valmistustapa varchar(50)
+CREATE TABLE Recipe(
+id serial PRIMARY KEY,
+author integer REFERENCES UserAccount(id),
+name varchar(50) UNIQUE NOT NULL,
+timeAdded timestamp NOT NULL,
+instructions varchar(1000),
+glass varchar(50),
+method varchar(50)
 );
 
-CREATE TABLE Ainesosa(
-id SERIAL PRIMARY KEY,
-nimi varchar(50) UNIQUE NOT NULL
+CREATE TABLE Ingredient(
+id serial PRIMARY KEY,
+name varchar(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE ReseptiAines(
-resepti_id integer REFERENCES Resepti(id),
-ainesosa_id integer REFERENCES Ainesosa(id)
+CREATE TABLE RecipeIngredient(
+recipe_id integer REFERENCES Recipe(id),
+ingredient_id integer REFERENCES Ingredient(id),
+quantity varchar(50)
 );

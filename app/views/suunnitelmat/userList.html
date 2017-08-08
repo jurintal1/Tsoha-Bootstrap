@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}   
+ 
+ <p>
+  <table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+      <td>Nimi</td>
+      <td>Sähköpostiosoite</td>
+      <td>Käyttäjätaso</td> 
+      <td></td> 
+    </tr>      
+    </thead>
+
+    <tbody>      
+      <tr>
+        <td>Jussi</td>
+        <td>jussi.rintala@helsinki.fi</td> 
+        <td>0</td>
+        <td>
+          <button class="btn btn-default">Muokkaa</button>       
+          <button class="btn btn-default">Poista</button>       
+      </tr>
+      
+    </tbody>
+  </table>
+ 
+
+{% endblock %}
