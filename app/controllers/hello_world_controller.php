@@ -1,6 +1,7 @@
 <?php
-
+  require 'app/models/userAccount.php';
   class HelloWorldController extends BaseController{
+
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
@@ -8,8 +9,10 @@
     }
 
     public static function sandbox(){
-      // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      $firstUser = UserAccount::find(1);
+      $allUsers = UserAccount::all();    
+      Kint::dump($firstUser);
+      Kint::dump($allUsers);
     }
 
     public static function recipe(){

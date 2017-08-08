@@ -1,10 +1,11 @@
-<?php .
+<?php
 /**
 * 
 */
-class Ainesosa extends BaseClass
+class Ingredient extends BaseModel
 {
-public $id, $nimi;	
+	public $id, $name;	
+
 	function __construct($attributes)
 	{
 		parent::__construct($attributes);
@@ -13,17 +14,18 @@ public $id, $nimi;
 
 	public static function all()
 	{    
-	    $query = DB::connection()->prepare('SELECT * FROM Ainesosa');    
+	    $query = DB::connection()->prepare('SELECT * FROM Ingredient');    
 	    $query->execute();    
 	    $rows = $query->fetchAll();
 	    $ingredients = array();
 
 	    foreach($rows as $row){
-	      $ingredients[] = new Ainesosa(array(
+	      $ingredients[] = new Ingredient(array(
 	        'id' => $row['id'],
-	        'nimi' => $row['nimi']	        	        
+	        'name' => $row['name']	        	        
 	        ));  
-	}
+		}
+
 		return $ingredients;
 	}
 
@@ -31,14 +33,14 @@ public $id, $nimi;
   	public static function find($id)
   	{
     	$query = DB::connection()->prepare
-    		('SELECT * FROM Ainesosa WHERE id = :id LIMIT 1');
+    		('SELECT * FROM Ingredient WHERE id = :id LIMIT 1');
     	$query->execute(array('id' => $id));
     	$row = $query->fetch();
 
     	if($row){
-      		$ingredient = new Ainesosa(array(
+      		$ingredient = new Ingredient(array(
         	'id' => $row['id'],
-	        'nimi' => $row['nimi']	                
+	        'name' => $row['name']	                
 	        ));  
 
       		return $ingredient;
