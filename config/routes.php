@@ -16,7 +16,7 @@
     HelloWorldController::listRecipes();
   });
 
-  $routes->get('/reseptilista', function() {
+  $routes->get('/kayttajalista', function() {
     HelloWorldController::listUsers();
   });
 
