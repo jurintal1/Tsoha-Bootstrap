@@ -1,24 +1,36 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    RecipeController::index();
   });
 
   $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
   });
 
-  $routes->get('/resepti', function() {
-    HelloWorldController::recipe();
+  $routes->get('/resepti/:id', function($id) {
+    RecipeController::show($id);
   });
 
-  $routes->get('/reseptilista', function() {
-    HelloWorldController::listRecipes();
+  $routes->get('/lisaa_resepti', function() {
+    RecipeController::add();
+  });
+
+  $routes->post('/lisaa_resepti', function() {
+    RecipeController::store();
+  });
+
+
+
+
+  $routes->get('/kayttajalista', function() {
+    HelloWorldController::listUsers();
   });
 
   $routes->get('/kayttajalista', function() {
     HelloWorldController::listUsers();
   });
+
 
   $routes->get('/muokkaa_reseptia', function() {
     HelloWorldController::editRecipe();
@@ -27,5 +39,7 @@
   $routes->get('/muokkaa_kayttajaa', function() {
     HelloWorldController::editUser();
   });
+
+
 
 

@@ -50,5 +50,25 @@ class UserAccount extends BaseModel
     	}
 
     	return null;
+    	
+  	}
+
+  	  	public static function findName($name)
+  	{
+    	$query = DB::connection()->prepare
+    		('SELECT * FROM Ingredient WHERE LOWER(name) = LOWER(:name) LIMIT 1');
+    	$query->execute(array('name' => $name));
+    	$row = $query->fetch();
+
+    	if($row){
+      		$ingredient = new Ingredient(array(
+        	'id' => $row['id'],
+	        'name' => $row['name']	                
+	        ));  
+
+      		return $ingredient;
+    	}
+
+    	return null;
   	}
 }

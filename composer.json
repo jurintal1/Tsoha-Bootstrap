@@ -3,7 +3,8 @@
 		"classmap": [
 			"config/database.php",
 			"lib",
-			"app/controllers"
+			"app/controllers",
+			"app/models"
 		]
 	},
 	"require": {
@@ -11,5 +12,6 @@
 		"twig/twig": "~1.5",
 		"raveren/kint": "v0.9",
 		"zeuxisoo/slim-whoops": "0.3.0"
+
 	}
 }

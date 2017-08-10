@@ -1,18 +1,22 @@
 <?php
-  require 'app/models/userAccount.php';
+  
   class HelloWorldController extends BaseController{
 
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
-      View::make('suunnitelmat/frontPage.html');
+      $recipes = Recipe::all();      
+      View::make('suunnitelmat/index.html', array('recipes' => $recipes));
     }
 
     public static function sandbox(){
-      $firstUser = UserAccount::find(1);
-      $allUsers = UserAccount::all();    
-      Kint::dump($firstUser);
-      Kint::dump($allUsers);
+      $recipe = Recipe::find(1);
+      $recipeAuthor = UserAccount::find(1);                  
+      Kint::dump($recipeAuthor->name);
+      Kint::dump($recipe->name);
+      Kint::dump($recipe->author);
+
+      
     }
 
     public static function recipe(){

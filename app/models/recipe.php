@@ -4,7 +4,7 @@
 */
 class Recipe extends BaseModel
 {
-	public $id, $name, $instructions, $glass, $method, $dateAdded;
+	public $id, $name, $author, $instructions, $glass, $method, $timeAdded;
 
 	function __construct($attributes)
 	{
@@ -18,16 +18,18 @@ class Recipe extends BaseModel
 	    $query->execute();    
 	    $rows = $query->fetchAll();
 	    $recipes = array();
+	    
 
-	    foreach($rows as $row){
+	    foreach($rows as $row){    	
 	      $recipes[] = new Recipe(array(
 	        'id' => $row['id'],
+	        'author' => $row['author'],
 	        'name' => $row['name'],
 	        'instructions' => $row['instructions'],
 	        'glass' => $row['glass'],
 	        'method' => $row['method'],
-	        'dateAdded' => $row['dateAdded']
-	        ));  
+	        'timeAdded' => $row['timeadded']
+	        ));
 		}
 
 		return $recipes;
@@ -45,10 +47,11 @@ class Recipe extends BaseModel
       		$recipe = new Recipe(array(
         		'id' => $row['id'],
 	        	'name' => $row['name'],
+	        	'author' => $row['author'],
 	        	'instructions' => $row['instructions'],
 	        	'glass' => $row['glass'],
 	        	'method' => $row['method'],
-	        	'dateAdded' => $row['dateAdded']
+	        	'timeAdded' => $row['timeadded']
       		));
 
       		return $recipe;
@@ -56,5 +59,29 @@ class Recipe extends BaseModel
 
     	return null;
   	}
-}
+
+  	public static function getAuthor()
+  	{
+  		return $author;
+  	}
+
+  	public function save() {
+  		$query=DB::connection()->prepare(
+  			'INSERT INTO RECIPE(name, author, instructions, glass, method, timeadded)
+  				VALUES(:name, :author, :instructions, :glass, :method, now())  
+  				RETURNING id'
+  			);		    
+ 		$query->execute(array(
+ 			'name' => $this->name,
+ 			'author' => $this->author,
+ 			'instructions' => $this->instructions,
+ 			'glass' => $this->glass,
+ 			'method' => $this->method
+ 			
+ 			));
+ 		$row=$query->fetch();
+ 		$this->id = $row['id'];
+
+  	}
+
 }
