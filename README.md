@@ -12,8 +12,7 @@ Drinkkireseptitietokanta ja web-sovellus, jossa voi hakea reseptejä. Kirjautune
 ## Suunnitellut sivunäkymät
 
 * [Etusivu](https://jurintal.users.cs.helsinki.fi/drinkit/)
-* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti)
-* [Reseptilista](https://jurintal.users.cs.helsinki.fi/drinkit/reseptilista)
+* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti/1)
 * [Reseptin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaa_reseptia)
 * [Käyttäjätilin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaa_kayttajaa)
 * [Käyttäjälista](https://jurintal.users.cs.helsinki.fi/drinkit/kayttajalista)
