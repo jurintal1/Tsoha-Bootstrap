@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa reseptiä "{{recipe.name}}"</h1>
+
+  <form method="post" action="{{base_path}}/{{recipe.id}}/muokkaa">  
+    
+    <div class="form-group row">
+      <div class="col-xs-6">      
+        <label>Nimi</label>
+        <input class="form-control" name="name" type="text" value="{{recipe.name}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-6">      
+        <label for="glass">Lasi</label>
+        <input class="form-control" name="glass" type="text" value="{{recipe.glass}}">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-xs-6">      
+        <label for="method">Valmistustapa</label>
+        <input class="form-control" name="method" type="text" value="{{recipe.glass}}">
+      </div>
+    </div>
+
+    <div class="form-group row"> 
+      <div class="col-xs-10">           
+        <label>Ohje</label>
+        <textarea class="form-control" rows="3" name="instructions" type="text">
+          {{recipe.instructions}}
+        </textarea>
+      </div>
+    </div>
+
+
+      
+    
+    
+    <div class="form-group row">
+      <div class="col-xs-6">     
+        <h3>Ainesosat</h3>
+      </div>
+    </div>    
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <label for="quantity1">Määrä</label>
+        <input class="form-control" name="quantity1" type="text">
+      </div>
+      <div class="col-xs-6">
+        <label for="ingredient1">Ainesosa</label>
+        <input class="form-control" name="ingredient1" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity2" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient2" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity3" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient3" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity4" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient4" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity5" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient5" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity6" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient6" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity7" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient7" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity8" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient8" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity9" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient9" type="text">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-2">
+        <input class="form-control" name="quantity10" type="text">
+      </div>
+      <div class="col-xs-6">
+        <input class="form-control" name="ingredient10" type="text">
+      </div>
+    </div>
+
+    <div class="btn-group-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+
+
+  </form>
+{% endblock %}

@@ -83,6 +83,31 @@ class Recipe extends BaseModel
  		$this->id = $row['id'];
   	}
 
+
+
+  	public function update() { 		
+  		$query=DB::connection()->prepare(
+  			'UPDATE RECIPE(id, name, author, instructions, glass, method)
+  				VALUES(:id, :name, :author, :instructions, :glass, :method, 
+  				RETURNING id'
+  			);		    
+ 		$query->execute(array(
+ 			'id' => $this->id,
+ 			'name' => $this->name,
+ 			'author' => $this->author,
+ 			'instructions' => $this->instructions,
+ 			'glass' => $this->glass,
+ 			'method' => $this->method 			
+ 			));
+ 		
+  	}
+
+
+    public function destroy() {    
+      $query=DB::connection()->prepare('DELETE from RECIPE WHERE id = :id');
+      $query->execute(array('id' => $this->id));    
+    }
+
   	public function validate_name() {
   		$errors = array();
   		if (!$this -> validate_string_min_length($this->name, 2)

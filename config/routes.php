@@ -8,9 +8,28 @@
     HelloWorldController::sandbox();
   });
 
+
+
+
   $routes->get('/resepti/:id', function($id) {
     RecipeController::show($id);
   });
+
+   $routes->get('/resepti/:id/muokkaa', function($id) {
+    RecipeController::edit($id);
+  });
+
+
+  $routes->post('/resepti/:id/muokkaa', function($id) {
+    RecipeController::update($id);
+  });
+
+  $routes->post('/resepti/:id/poista', function($id) {
+    RecipeController::delete($id);
+  });
+
+
+
 
   $routes->get('/lisaa_resepti', function() {
     RecipeController::add();
@@ -21,20 +40,6 @@
   });
 
 
-
-
-  $routes->get('/kayttajalista', function() {
-    HelloWorldController::listUsers();
-  });
-
-  $routes->get('/kayttajalista', function() {
-    HelloWorldController::listUsers();
-  });
-
-
-  $routes->get('/muokkaa_reseptia', function() {
-    HelloWorldController::editRecipe();
-  });
 
   $routes->get('/muokkaa_kayttajaa', function() {
     HelloWorldController::editUser();

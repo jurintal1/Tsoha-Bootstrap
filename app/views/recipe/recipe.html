@@ -7,7 +7,14 @@
   <h1>{{recipe.name|e}}</h1>
   
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
+
+    <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/poista">
+      <button type="submit" class="btn btn-danger">Poista</button>
+    </form>
+
+    <form method="get" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
+      <button type="submit" class="btn btn-info">Muokkaa</button>
+    </form>
   </p>  
   
   <ul>
