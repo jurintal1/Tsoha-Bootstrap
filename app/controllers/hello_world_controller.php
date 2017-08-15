@@ -9,15 +9,20 @@
       View::make('suunnitelmat/index.html', array('recipes' => $recipes));
     }
 
+    
     public static function sandbox(){
-      $recipe = Recipe::find(1);
-      $recipeAuthor = UserAccount::find(1);                  
-      Kint::dump($recipeAuthor->name);
-      Kint::dump($recipe->name);
-      Kint::dump($recipe->author);
+    $test = new Recipe(array(
+      'name' => '',
+      'glass' => 'd',
+      'instructions' => 'd',
+      'method' => 'a'
+     ));
+    
+    $errors = $test->errors();
 
-      
+    Kint::dump($errors);
     }
+
 
     public static function recipe(){
       // Testaa koodiasi täällä

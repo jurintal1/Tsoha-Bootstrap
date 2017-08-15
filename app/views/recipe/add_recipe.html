@@ -2,34 +2,44 @@
 {% block content %}
   <h1>Lisää uusi resepti</h1>
 
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
   <form method="post" action="{{base_path}}/lisaa_resepti">    
     
 
     <div class="form-group row">
       <div class="col-xs-6">      
         <label for="name">Nimi</label>
-        <input class="form-control" name="name" type="text">
+        <input class="form-control" name="name" type="text" value="{{attributes.name}}">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-6">      
         <label for="glass">Lasi</label>
-        <input class="form-control" name="glass" type="text">
+        <input class="form-control" name="glass" type="text" value="{{attributes.glass}}">
       </div>
     </div>
 
     <div class="form-group row">
       <div class="col-xs-6">      
         <label for="method">Valmistustapa</label>
-        <input class="form-control" name="method" type="text">
+        <input class="form-control" name="method" type="text" value="{{attributes.glass}}">
       </div>
     </div>
 
     <div class="form-group row"> 
       <div class="col-xs-10">           
         <label>Ohje</label>
-        <textarea class="form-control" rows="3" name="instructions" type="text">
+        <textarea class="form-control" rows="3" name="instructions" type="text" value="{{attributes.instructions}}">
         </textarea>
       </div>
     </div>

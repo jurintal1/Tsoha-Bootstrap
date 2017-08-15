@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa reseptiä Gin Tonic</h1>
+  <h1>Muokkaa reseptiä Gin "{{attributes.name}}"</h1>
 
   <form>    
     <div class="form-group">
       <label>Nimi</label>
-      <input type="text" class="form-control" value="Gin Tonic">
+      <input type="text" class="form-control" value="{{attributes.name}}">
     </div>
     <div class="form-group">
       <label>Lasi</label>
-      <input type="text" class="form-control" value="High Ball">
+      <input type="text" class="form-control" value="{{attributes.glass}}">
     </div>
     <div class="form-group">
       <label>Valmistustapa</label>
-      <input type="text" class="form-control" value="rakennetaan">
+      <input type="text" class="form-control" value="{{attributes.method}}">
     </div>
     <div class="form-group">
       <label>Ohje</label>
       <textarea class="form-control">
-      Täytä lasi puolilleen jäitä, lisää gini ja pidennä tonic-vedellä. Purista joukkoon muutaman limeviipaleen mehut ja pudota viipaleet lasiin koristeeksi.
+      "{{attributes.instructions}}"
       </textarea>
     </div>
     <h3>Ainesosat</h3>

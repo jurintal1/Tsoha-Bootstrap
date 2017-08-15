@@ -9,6 +9,7 @@ class Recipe extends BaseModel
 	function __construct($attributes)
 	{
 		parent::__construct($attributes);
+		$this->validators = array('validate_name', 'validate_instructions', 'validate_method', 'validate_glass');
 	}
 
 
@@ -76,12 +77,68 @@ class Recipe extends BaseModel
  			'author' => $this->author,
  			'instructions' => $this->instructions,
  			'glass' => $this->glass,
- 			'method' => $this->method
- 			
+ 			'method' => $this->method 			
  			));
  		$row=$query->fetch();
  		$this->id = $row['id'];
+  	}
+
+  	public function validate_name() {
+  		$errors = array();
+  		if (!$this -> validate_string_min_length($this->name, 2)
+  			&& $this -> validate_string_not_empty($this->name)) {
+  			$errors[] = "Liian lyhyt nimi, laita pidempi!";
+  		}
+
+  		if (!$this -> validate_string_not_empty($this->name)){
+  			$errors[] = "Lisää nimi!";
+  		}
+
+  		if (!$this -> validate_string_max_length($this->name, 50)){
+  			$errors[] = "Liian pitkä nimi!";
+  		}
+
+  		return $errors;
+  	}
+
+  	public function validate_instructions() {
+  		$errors = array();  		
+  		if (!$this -> validate_string_max_length($this->instructions, 50)){
+  			$errors[] = "Liian pitkä nimi!";
+  		}
+  		if (!$this -> validate_string_min_length($this->instructions, 3)
+  			&& $this -> validate_string_not_empty($this->instructions)){
+  			$errors[] = "Liian lyhyt ohje!";
+  		}
+  		return $errors;
 
   	}
 
-}
+  	public function validate_method() {
+  		$errors = array();
+  		if ($this->validate_string_not_empty($this ->method)
+  			&& !$this -> validate_string_min_length($this->method, 3)){
+  				$errors[] = "Liian lyhyt valmistustapa!";
+  		}
+
+  		if (!$this -> validate_string_max_length($this->method, 50)){
+  			$errors[] = "Liian pitkä valmistustapa!";
+  		}
+
+  		return $errors;
+  	}
+
+  	public function validate_glass() {
+  		$errors = array();
+  		if (!$this -> validate_string_min_length($this->glass, 3)) {
+  			$errors[] = "Liian lyhyt lasi!";
+  		}
+
+  		if (!$this -> validate_string_max_length($this->glass, 50)){
+  			$errors[] = "Liian pitkä lasi!";
+  		}
+
+  		return $errors;
+  	}
+
+}		
