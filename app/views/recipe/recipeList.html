@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}   
- 
+ {{message|e}}
  <p>
   <table class="table table-striped table-bordered">
     <thead>
@@ -18,7 +18,7 @@
             <a href="{{base_path}}/resepti/{{recipe.id|e}}">
               {{recipe.name|e}}</a</a>
             </td>
-          <td>{{recipe.author|e}}</td> 
+          <td>{{recipe.getAuthorName()|e}}</td> 
            <td>{{recipe.timeAdded|e}}</td>       
         </tr>
       {% endfor %}

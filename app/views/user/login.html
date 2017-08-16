@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    {{error|e}}
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-4">
+                <form class="form-signin" method="post" action="{{base_path}}/login">
+                    <h3 class="form-signin-heading">Kirjaudu järjestelmään</h3>
+                    <input type="text" name="name" class="form-control" value="{{name|e}}" placeholder="käyttäjätunnus">                    
+                    <input type="password" name="password" class="form-control">              
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Kirjaudu
+                    </button>
+                </form>                
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <a href="#">Minulla ei ole käyttäjätunnuksia</a>
+                
+            </div>
+        </div>
+
+    </div> 
+{% endblock %}

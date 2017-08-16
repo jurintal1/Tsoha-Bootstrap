@@ -11,18 +11,26 @@
     </div>
   {% endif %}
 
-  
+
   <h1>Muokkaa reseptiä "{{recipe.name}}"</h1>
 
   <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">  
     
     <div class="form-group row">
+      <div class="col-xs-6">
+        <label class="control-label">Laatija:</label>
+        <p class="form-control-static">{{author.name}}</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
       <div class="col-xs-6">      
         <label>Nimi</label>
         <input class="form-control" name="name" type="text" value="{{recipe.name}}">
       </div>
-    </div>
+    </div>    
 
+    
     <div class="form-group row">
       <div class="col-xs-6">      
         <label for="glass">Lasi</label>

@@ -20,7 +20,7 @@
   <ul>
     <li><strong>Lasi:  </strong>{{recipe.glass|e}}</li>
     <li><strong>Valmistustapa:  </strong>{{recipe.method|e}}</li>   
-    <li><strong>Lisääjä:  </strong>{{author.name|e}}</li>   
+    <li><strong>Lisääjä:  </strong>{{recipe.getAuthorName()|e}}</li>   
     <li><strong>Lisäyspäivä:  </strong>{{recipe.timeAdded|e}}</li>  
   </ul>
   
@@ -29,19 +29,14 @@
     <thead>      
     </thead>
 
-    <tbody>      
-      <tr>
-        <td style="width:50px">4 cl</td>
-        <td style="width:200px">gin (TÄMÄ AINESOSIEN NÄYTTÄMINENHÄN EI MUUTEN OIKEASTI TOIMI VIELÄ)</td>        
-      </tr>
-      <tr>
-        <td>12 cl</td>
-        <td>tonic</td>        
-      </tr>
-      <tr>
-        <td>0,45</td>
-        <td>lime</td>        
-      </tr>
+    <tbody>
+    
+       <!-- {% for ingredient in recipeIngredients %}            
+        <tr>
+          <td style="width:50px">{{ingredient.quantity|e}}</td>
+          <td style="width:50px">{{ingredient.ingredient_id|e}}</td>            
+        </tr>
+      {% endfor %} -->
     </tbody>
   </table>
   <p>

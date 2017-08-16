@@ -60,12 +60,8 @@ class Recipe extends BaseModel
     	return null;
   	}
 
+    
 
-
-  	public static function getAuthor()
-  	{
-  		return $author;
-  	}
 
 
   	public function save() {
@@ -94,7 +90,7 @@ class Recipe extends BaseModel
           SET name=:name, author=:author, instructions=:instructions,
            glass=:glass, method=:method
           WHERE id=:id' 				
-  			);		    
+  			);      		    
    		$query->execute(array(
    			'id' => $this->id,
    			'name' => $this->name,
@@ -177,4 +173,13 @@ class Recipe extends BaseModel
   		return $errors;
   	}
 
+    public function validate_ingredients() {
+
+    }
+
+
+    public function getAuthorName() {
+      $author = UserAccount::find($this->author);
+      return $author->name;
+    }
 }		

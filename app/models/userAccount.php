@@ -53,22 +53,43 @@ class UserAccount extends BaseModel
     	
   	}
 
-  	  	public static function findName($name)
-  	{
-    	$query = DB::connection()->prepare
-    		('SELECT * FROM Ingredient WHERE LOWER(name) = LOWER(:name) LIMIT 1');
-    	$query->execute(array('name' => $name));
-    	$row = $query->fetch();
+  	  	public static function findName($name)	{
+	    	$query = DB::connection()->prepare
+	    		('SELECT * FROM UserAccount WHERE name=:name LIMIT 1');
+	    	$query->execute(array('name' => $name));
+	    	$row = $query->fetch();
 
-    	if($row){
-      		$ingredient = new Ingredient(array(
-        	'id' => $row['id'],
-	        'name' => $row['name']	                
-	        ));  
+	    	if($row){
+	      		$UserAccount = new UserAccount(array(
+	        	'id' => $row['id'],
+		        'name' => $row['name'],
+		        'password' => $row['password'],
+		        'role' => $row['password'],
+		        'active' => $row['active']                
+		        )); 
+	      		return $UserAccount;
+	    	}
+	    	return null;
+  		}
 
-      		return $ingredient;
-    	}
-
-    	return null;
-  	}
+  		public static function authenticate($name, $password) {
+  			Kint::dump($name, $password); 			
+  			$query = DB::connection()->prepare
+  				('SELECT * FROM UserAccount WHERE name = :name AND password = :password
+  				LIMIT 1');
+  			$query->execute(array('name' => $name, 'password' => $password));
+  			$row = $query->fetch();
+  			if($row) {
+  			  $UserAccount = new UserAccount(array(
+	        	'id' => $row['id'],
+		        'name' => $row['name'],
+		        'password' => $row['password'],
+		        'role' => $row['role'],
+		        'active' => $row['active']                
+		        )); 
+	      		return $UserAccount;
+			}else{
+  				return null;
+			}
+  		}
 }

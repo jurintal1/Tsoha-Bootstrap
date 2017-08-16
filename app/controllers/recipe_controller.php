@@ -12,8 +12,11 @@
 
 		public static function show($id) {
 			$recipe = Recipe::find($id);
-			$author = UserAccount::find($recipe->author);											
-			View::make('recipe/recipe.html', array('recipe' => $recipe, 'author' => $author));
+			$author = UserAccount::find($recipe->author);
+			$recipeIngredients = RecipeIngredient::find($id);
+			
+			Kint::dump($recipeIngredients);								
+			View::make('recipe/recipe.html', array('recipe' => $recipe, 'recipeIngredients' => $recipeIngredients));
 		}
 
 
@@ -27,7 +30,7 @@
 		public static function store() {												
 			$params = $_POST;
 			$attributes = array(
-				'author' => '1',  //korjataan myöhemmin!
+				'author' => 1,  //korjataan myöhemmin!
 		        'name' => $params['name'],
 		        'instructions' => $params['instructions'],
 		        'glass' => $params['glass'],
@@ -53,16 +56,19 @@
 
 		public static function edit($id) {
 			$recipe = Recipe::find($id);
-			View::make('recipe/edit_recipe.html', array('recipe' => $recipe));
+			$author = UserAccount::find($recipe->author);
+			$recipeIngredients = 
+			View::make('recipe/edit_recipe.html',
+				array('recipe' => $recipe, 'author' => $author));
 		}
 
 
 
 		public static function update($id) {											
-			$params = $_POST;
+			$params = $_POST;						
 			$attributes = array(
 				'id' => $id,
-				'author' => "1", //korjatttava!
+				'author' => 1,
 		        'name' => $params['name'],
 		        'instructions' => $params['instructions'],
 		        'glass' => $params['glass'],

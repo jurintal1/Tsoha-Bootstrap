@@ -33,18 +33,29 @@
             <span class="icon-bar"></span>
           </button>
           <!-- Sovelluksen nimi -->
-          <a class="navbar-brand" href="{{base_path}}">Yhdenlainen drinkkireseptiarkisto</a>
+          <a class="navbar-brand" href="{{base_path}}">
+            <strong>Yhdenlainen drinkkireseptiarkisto</strong>
+          </a>
         </div>
 
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Etusivu</a></li>
+            <li><a href="{{base_path}}">Drinkit</a></li>                        
+            <li><a href="{{base_path}}/ainesosat">Ainesosat</a></li>
+        
             <li><a href="{{base_path}}/lisaa_resepti">Lisaa resepti</a></li>
-            <li><a href="{{base_path}}/ainesosat">Selaa ainesosia</a></li>
-            <li>              
-              <input class="form-control" id="" type="text">
-              <button type="submit" class="btn btn-primary">Hae</button>
+
+            {% if not user_logged_in %}
+            <li><a href="{{base_path}}/login">Kirjaudu</a></li>
+            {% endif %}
+
+
+            <li>
+              <form class="form-inline">              
+                <input class="form-control" name="search" type="text">
+                <button type="submit" class="btn btn-primary">Hae</button>
+              </form>
             </li>
           </ul>
         </div>

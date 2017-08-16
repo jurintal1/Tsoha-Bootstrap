@@ -45,6 +45,14 @@
     HelloWorldController::editUser();
   });
 
+  $routes->get('/login', function() {
+    UserAccountController::login();
+  });
+
+  $routes->post('/login', function() {
+    UserAccountController::handle_login();
+  });
+
 
 
 
