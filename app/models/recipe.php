@@ -13,6 +13,7 @@ class Recipe extends BaseModel
 	}
 
 
+
 	public static function all()
 	{    
 	    $query = DB::connection()->prepare('SELECT * FROM Recipe');    
@@ -31,14 +32,13 @@ class Recipe extends BaseModel
 	        'method' => $row['method'],
 	        'timeAdded' => $row['timeadded']
 	        ));
-		}
-
-		return $recipes;
+		  }
+		  return $recipes;
 	}
 
 
-  	public static function find($id)
-  	{
+
+  	public static function find($id) {
     	$query = DB::connection()->prepare
     		('SELECT * FROM Recipe WHERE id = :id LIMIT 1');
     	$query->execute(array('id' => $id));
@@ -57,48 +57,52 @@ class Recipe extends BaseModel
 
       		return $recipe;
     	}
-
     	return null;
   	}
+
+
 
   	public static function getAuthor()
   	{
   		return $author;
   	}
 
+
   	public function save() {
   		$query=DB::connection()->prepare(
   			'INSERT INTO RECIPE(name, author, instructions, glass, method, timeadded)
   				VALUES(:name, :author, :instructions, :glass, :method, now())  
   				RETURNING id'
-  			);		    
- 		$query->execute(array(
- 			'name' => $this->name,
- 			'author' => $this->author,
- 			'instructions' => $this->instructions,
- 			'glass' => $this->glass,
- 			'method' => $this->method 			
- 			));
- 		$row=$query->fetch();
- 		$this->id = $row['id'];
+  			);
+
+   		$query->execute(array(
+   			'name' => $this->name,
+   			'author' => $this->author,
+   			'instructions' => $this->instructions,
+   			'glass' => $this->glass,
+   			'method' => $this->method 			
+   			));
+   		$row=$query->fetch();
+   		$this->id = $row['id'];
   	}
 
 
 
   	public function update() { 		
   		$query=DB::connection()->prepare(
-  			'UPDATE RECIPE(id, name, author, instructions, glass, method)
-  				VALUES(:id, :name, :author, :instructions, :glass, :method, 
-  				RETURNING id'
+  			'UPDATE RECIPE
+          SET name=:name, author=:author, instructions=:instructions,
+           glass=:glass, method=:method
+          WHERE id=:id' 				
   			);		    
- 		$query->execute(array(
- 			'id' => $this->id,
- 			'name' => $this->name,
- 			'author' => $this->author,
- 			'instructions' => $this->instructions,
- 			'glass' => $this->glass,
- 			'method' => $this->method 			
- 			));
+   		$query->execute(array(
+   			'id' => $this->id,
+   			'name' => $this->name,
+   			'author' => $this->author,
+   			'instructions' => $this->instructions,
+   			'glass' => $this->glass,
+   			'method' => $this->method 			
+   			));
  		
   	}
 
@@ -127,9 +131,10 @@ class Recipe extends BaseModel
   	}
 
   	public function validate_instructions() {
+      Kint::dump($this->instructions);
   		$errors = array();  		
   		if (!$this -> validate_string_max_length($this->instructions, 50)){
-  			$errors[] = "Liian pitkä nimi!";
+  			$errors[] = "Liian pitkä ohje!";
   		}
   		if (!$this -> validate_string_min_length($this->instructions, 3)
   			&& $this -> validate_string_not_empty($this->instructions)){
@@ -153,15 +158,21 @@ class Recipe extends BaseModel
   		return $errors;
   	}
 
+
+
   	public function validate_glass() {
   		$errors = array();
-  		if (!$this -> validate_string_min_length($this->glass, 3)) {
-  			$errors[] = "Liian lyhyt lasi!";
-  		}
+      if($this -> validate_string_not_empty($this->glass)) {
 
-  		if (!$this -> validate_string_max_length($this->glass, 50)){
+  		  if (!$this -> validate_string_min_length($this->glass, 3)) {
+  			$errors[] = "Liian lyhyt lasi!";
+  		  }
+
+  		  if (!$this -> validate_string_max_length($this->glass, 50)){
   			$errors[] = "Liian pitkä lasi!";
-  		}
+  		  }
+
+      }
 
   		return $errors;
   	}

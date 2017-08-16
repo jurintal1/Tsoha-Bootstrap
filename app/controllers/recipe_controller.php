@@ -73,9 +73,10 @@
 	        
 	        if (count($errors) == 0) {	        
 	        	$recipe->update();
-	        	Redirect::to('/' . $recipe->id, array('message' => 'Reseptin muokkaaminen onnistui.'));
+	        	Redirect::to('/resepti/' . $recipe->id, array('message' => 'Reseptin muokkaaminen onnistui.'));
 	        } else {
-	        	View::make('/recipe/edit_recipe.html', array('errors' => $errors, 'attributes' => $attributes));
+	        	View::make('/recipe/edit_recipe.html', array('errors' => $errors,
+	        	 'recipe' => $recipe));
 	        }       
 
 
