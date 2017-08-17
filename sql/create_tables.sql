@@ -22,8 +22,8 @@ name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE RecipeIngredient(
-recipe_id integer REFERENCES Recipe(id),
-ingredient_id integer REFERENCES Ingredient(id),
+recipe_id integer REFERENCES Recipe(id) NOT NULL,
+ingredient_id integer REFERENCES Ingredient(id) NOT NULL,
 quantity varchar(50),
-UNIQUE (recipe_id, ingredient_id);
+UNIQUE (recipe_id, ingredient_id)
 );

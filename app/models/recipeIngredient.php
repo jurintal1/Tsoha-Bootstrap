@@ -27,4 +27,9 @@ class RecipeIngredient extends BaseModel
       }
       return $recipeIngredients;
     }
+
+    public function getIngredientName() {
+    	$ingredient = Ingredient::find($this->ingredient_id);
+    	return $ingredient->name;
+    }
 }

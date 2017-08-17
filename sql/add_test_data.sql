@@ -1,6 +1,7 @@
 INSERT INTO UserAccount (name, password, role) VALUES ('Jussi', 'kaakkuri', '0');
 INSERT INTO UserAccount (name, password, role) VALUES ('Sirpa', 'laama', '1');
 INSERT INTO UserAccount (name, password, role, active) VALUES ('Sorsa', 'hanhi', '0', true);
+INSERT INTO UserAccount (name, password, role) VALUES ('admin', 'Helsinki1977', '0', true);
 
 INSERT INTO Recipe (author, name, timeAdded) 
 	VALUES ((SELECT id FROM UserAccount WHERE name = 'Jussi'), 'Pelkkä piimä', now());
@@ -19,6 +20,7 @@ INSERT INTO Ingredient (name)  VALUES ('sitruunamehu');
 INSERT INTO Ingredient (name)  VALUES ('piimä');
 INSERT INTO Ingredient (name)  VALUES ('appelsiini');
 INSERT INTO Ingredient (name)  VALUES ('cocktailkirsikka');
+INSERT INTO Ingredient (name)  VALUES ('sokerisiirappi');
 
 
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id)

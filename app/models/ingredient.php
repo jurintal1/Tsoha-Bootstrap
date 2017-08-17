@@ -68,4 +68,3 @@ class Ingredient extends BaseModel
     	return null;
   	}
 }
-}

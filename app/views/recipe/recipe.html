@@ -31,15 +31,16 @@
 
     <tbody>
     
-       <!-- {% for ingredient in recipeIngredients %}            
+      {% for recipeIngredient in recipeIngredients %}            
         <tr>
-          <td style="width:50px">{{ingredient.quantity|e}}</td>
-          <td style="width:50px">{{ingredient.ingredient_id|e}}</td>            
+          <td style="width:50px">{{recipeIngredient.quantity|e}}</td>
+          <td style="width:50px">{{recipeIngredient.getIngredientName()|e}}</td>
         </tr>
-      {% endfor %} -->
+      {% endfor %}
+
     </tbody>
   </table>
-  <p>
+  
     {{recipe.instructions|e}}
-  </p>
+  
 {% endblock %}

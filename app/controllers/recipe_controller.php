@@ -3,8 +3,7 @@
 	class RecipeController extends BaseController {
 	
 		public static function index() {
-			$recipes = Recipe::all();
-			// tähän vielä laatijanimien nouto			
+			$recipes = Recipe::all();						
 			View::make('recipe/recipeList.html', array('recipes' => $recipes));
 		}
 
@@ -13,9 +12,8 @@
 		public static function show($id) {
 			$recipe = Recipe::find($id);
 			$author = UserAccount::find($recipe->author);
-			$recipeIngredients = RecipeIngredient::find($id);
-			
-			Kint::dump($recipeIngredients);								
+			$recipeIngredients = RecipeIngredient::find($id);		
+										
 			View::make('recipe/recipe.html', array('recipe' => $recipe, 'recipeIngredients' => $recipeIngredients));
 		}
 
