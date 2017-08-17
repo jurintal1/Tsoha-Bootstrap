@@ -53,11 +53,10 @@
 
 
 		public static function edit($id) {
-			$recipe = Recipe::find($id);
-			$author = UserAccount::find($recipe->author);
-			$recipeIngredients = 
+			$recipe = Recipe::find($id);			
+			$recipeIngredients = RecipeIngredient::find($id);
 			View::make('recipe/edit_recipe.html',
-				array('recipe' => $recipe, 'author' => $author));
+				array('recipe' => $recipe, 'recipeIngredients' => $recipeIngredients));
 		}
 
 
@@ -66,7 +65,7 @@
 			$params = $_POST;						
 			$attributes = array(
 				'id' => $id,
-				'author' => 1,
+				'author' => $params['author'],
 		        'name' => $params['name'],
 		        'instructions' => $params['instructions'],
 		        'glass' => $params['glass'],

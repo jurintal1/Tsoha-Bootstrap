@@ -127,8 +127,7 @@ class Recipe extends BaseModel
   	}
 
   	public function validate_instructions() {
-      Kint::dump($this->instructions);
-  		$errors = array();  		
+      $errors = array();  		
   		if (!$this -> validate_string_max_length($this->instructions, 50)){
   			$errors[] = "Liian pitkä ohje!";
   		}
