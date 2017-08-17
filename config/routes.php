@@ -53,6 +53,10 @@
     UserAccountController::handle_login();
   });
 
+  $routes->get('/kayttajalista', function() {
+    UserAccountController::index();
+  });
+
 
 
 
