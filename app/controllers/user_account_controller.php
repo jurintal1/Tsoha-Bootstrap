@@ -4,12 +4,12 @@
 	
 		public static function index() {
 			$users = UserAccount::all();
-			View::make('user/userList.html', array('users' => $users));
+			View::make('user/user_list.html', array('users' => $users));
 		}
 
 		public static function show($id) {
 			$user = UserAccount::find($id);
-			View::make('user/user_list.html', array('user' => $user));
+			View::make('user/user.html', array('user' => $user));
 
 		}
 

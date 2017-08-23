@@ -4,7 +4,7 @@
 	
 		public static function index() {
 			$recipes = Recipe::all();						
-			View::make('recipe/recipeList.html', array('recipes' => $recipes));
+			View::make('recipe/recipe_list.html', array('recipes' => $recipes));
 		}
 
 
