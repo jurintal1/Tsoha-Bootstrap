@@ -9,9 +9,16 @@
 
 		public static function show($id) {
 			$user = UserAccount::find($id);
-			View::make('user/user.html', array('user' => $user));
+			View::make('user/user.html', array('user' => $user));			
 
 		}
+
+		public static function edit($id) {
+			$user = UserAccount::find($id);			
+			View::make('user/edit_user.html',
+				array('user' => $user));
+		}
+
 
 		public static function login() {
 				View::make('user/login.html');

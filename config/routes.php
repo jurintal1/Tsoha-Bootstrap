@@ -47,8 +47,8 @@
   });
 
 
-  $routes->get('/kayttaja/:id/muokkaa', 'check_logged_in', function() {
-    UserAccountController::editUser($id);
+  $routes->get('/kayttaja/:id', 'check_logged_in', function($id) {
+    UserAccountController::edit($id);
   });
 
   $routes->post('/kayttaja/:id/muokkaa', 'check_logged_in', function() {

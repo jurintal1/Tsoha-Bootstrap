@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa käyttäjää Jussi</h1>
+
+  <h1>Muokkaa käyttäjää {{user.name|e}} (kesken)</h1>
 
   <form>    
     <div class="form-group">
       <label>Nimi</label>
-      <input type="text" class="form-control" value="Jussi">
+      <input type="text" class="form-control" value="{{user.name|e}}">
     </div>
     
     <div class="form-group">
       <label>salasana</label>
-      <input type="text" class="form-control" value="haahka">
+      <input type="text" class="form-control" value="{{user.password|e}}">
     </div>   
     
 
     <div class="radio">
-      <label><input type="radio" name="optradio">Peruskäyttäjä</label>
+      <label><input type="radio" name="optradio"">Peruskäyttäjä</label>
     <div>
     <div class="radio">   
       <label><input type="radio" name="optradio">Admin-käyttäjä</label>      
