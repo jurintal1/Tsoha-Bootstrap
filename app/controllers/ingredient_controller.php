@@ -1,20 +1,19 @@
 <?php
 
-	class RecipeController extends BaseController {
+	class IngredientController extends BaseController {
 	
-		public static function index() {
-			$recipes = Recipe::all();						
-			View::make('recipe/recipeList.html', array('recipes' => $recipes));
+		public static function ingredientList() {
+			$ingredients = Ingredient::all();						
+			View::make('ingredient/ingredient_list.html', array('ingredients' => $ingredients));
 		}
 
 
 
-		public static function show($id) {
-			$recipe = Recipe::find($id);
-			$author = UserAccount::find($recipe->author);
-			$recipeIngredients = RecipeIngredient::find($id);		
+		public static function showRecipes($id) {
+			$ingredient = Ingredient::find($id);
+			$recipes = Recipe::findIngredient($id);				
 										
-			View::make('recipe/recipe.html', array('recipe' => $recipe, 'recipeIngredients' => $recipeIngredients));
+			View::make('ingredient/ingredient.html', array('ingredient' => $ingredient, 'recipes' => $recipes));
 		}
 
 
@@ -25,33 +24,30 @@
 
 
 
-		public static function store() {
+		public static function store() {												
 			$params = $_POST;
-			$user = self::get_user_logged_in();
 			$attributes = array(
-				'author' => $user->id,
-		        'name' => trim($params['name']),
-		        'instructions' => trim($params['instructions']),
-		        'glass' => trim($params['glass']),
-		        'method' => trim($params['method'])
+				'author' => 1,  //korjataan myöhemmin!
+		        'name' => $params['name'],
+		        'instructions' => $params['instructions'],
+		        'glass' => $params['glass'],
+		        'method' => $params['method']
 				);
 			$recipe = new Recipe($attributes); 
 	        $errors = $recipe->errors();
-	        if (count($errors) == 0) {
+	        
+	        if (count($errors) == 0) {	        
 	        	$recipe->save();
-	        	RecipeIngredientController::store($recipe);
+	        	Redirect::to('/' . $recipe->id, array('message' => 'Tässä lisäämäsi uusi resepti!'));
 	        } else {
-	        	View::make('/recipe/add_recipe.html', array(
-	        		'errors' => $errors,
-	           		'recipe' => $recipe,	           		
-	           		));
-	        }        
-	                   
-	    }
+	        	View::make('/recipe/add_recipe.html', array('errors' => $errors, 'attributes' => $attributes));
+	        }       
 
-	    
 
-    
+	        //lisäksi käsiteltävä ainesosat
+	        
+
+		}
 
 
 

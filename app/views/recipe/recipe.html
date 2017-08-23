@@ -6,16 +6,19 @@
 
   <h1>{{recipe.name|e}}</h1>
   
-  <p>
-
+  {% if (user_logged_in.role == 0) %}
+  <p> 
     <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/poista">
       <button type="submit" class="btn btn-danger">Poista</button>
     </form>
-
+  </p>
+  <p>
     <form method="get" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
       <button type="submit" class="btn btn-info">Muokkaa</button>
     </form>
-  </p>  
+  </p>
+  {% endif %} 
+  
   
   <ul>
     <li><strong>Lasi:  </strong>{{recipe.glass|e}}</li>

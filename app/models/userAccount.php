@@ -30,6 +30,27 @@ class UserAccount extends BaseModel
 		return $users;
 	}
 
+	public static function allPassive()
+	{    
+	    $query = DB::connection()->prepare
+	    	('SELECT * FROM UserAccount WHERE active = false');    
+	    $query->execute();    
+	    $rows = $query->fetchAll();
+	    $users = array();
+
+	    foreach($rows as $row){
+	      $users[] = new UserAccount(array(
+	        'id' => $row['id'],
+	        'name' => $row['name'],
+	        'password' => $row['password'],
+	        'role' => $row['role'],        
+	        'active' => $row['active']	        
+	        ));
+	    }  
+	
+		return $users;
+	}
+
 
   	public static function find($id)
   	{
@@ -73,13 +94,13 @@ class UserAccount extends BaseModel
   		}
 
   		public static function authenticate($name, $password) {
-  			Kint::dump($name, $password); 			
+  				
   			$query = DB::connection()->prepare
   				('SELECT * FROM UserAccount WHERE name = :name AND password = :password
   				LIMIT 1');
   			$query->execute(array('name' => $name, 'password' => $password));
   			$row = $query->fetch();
-  			if($row) {
+  			if($row['active']) {
   			  $UserAccount = new UserAccount(array(
 	        	'id' => $row['id'],
 		        'name' => $row['name'],
@@ -92,4 +113,47 @@ class UserAccount extends BaseModel
   				return null;
 			}
   		}
+
+  		public function validate_name() {
+	  		$errors = array();
+	  		if (!$this -> validate_string_min_length($this->name, 8)
+	  			&& $this -> validate_string_not_empty($this->name)) {
+	  			$errors[] = "Käyttäjätunnuksen pitää olla vähintään kahdeksan merkin pituinen";
+	  		}
+
+	  		if (!$this -> validate_string_not_empty($this->name)){
+	  			$errors[] = "Lisää nimi!";
+	  		}
+
+	  		if (!$this -> validate_string_max_length($this->name, 50)){
+	  			$errors[] = "Liian pitkä käyttäjätunnus!";
+	  		}
+
+	  		return $errors;
+  		}
+
+
+
+  		public function validate_password() {
+  		$errors = array();
+  		if (!$this -> validate_string_min_length($this->password, 10)
+  			&& $this -> validate_string_not_empty($this->password)) {
+  			$errors[] = "Salasanan pitää olla vähintään kymmenen merkin pituinen";
+  		}
+
+  		if (!$this -> validate_string_not_empty($this->password)){
+  			$errors[] = "Lisää salasana!";
+  		}
+
+  		if (!$this -> validate_string_max_length($this->name, 50)){
+  			$errors[] = "Liian pitkä salasana!";
+  		}
+
+  		if ($this->password == $this.name){
+  			$errors[] = "Salasana ei saa olla sama kuin käyttäjätunnus";
+  		}
+
+  		return $errors;
+  	}
+
 }

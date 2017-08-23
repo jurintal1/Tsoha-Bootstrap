@@ -7,7 +7,7 @@
 
     <title>
       {% block title %}
-        Tietokantasovellus
+        Drinkit
       {% endblock %}
     </title>
 
@@ -31,8 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          <!-- Sovelluksen nimi -->
+          </button>          
           <a class="navbar-brand" href="{{base_path}}">
             <strong>Yhdenlainen drinkkireseptiarkisto</strong>
           </a>
@@ -43,15 +42,15 @@
             
             <li><a href="{{base_path}}">Drinkit</a></li>                        
             <li><a href="{{base_path}}/ainesosat">Ainesosat</a></li>
-        
-            <li><a href="{{base_path}}/lisaa_resepti">Lisaa resepti</a></li>
-
-            {% if not user_logged_in %}
-            <li><a href="{{base_path}}/login">Kirjaudu</a></li>
-            {% endif %}
-
             
-
+            <li><a href="{{base_path}}/lisaa_resepti">
+                Lisaa resepti
+            </a></li> 
+            <li>{{user_logged_in.role|e}}</li>
+            {% if user_logged_in.role == '1' %}
+            <li><a href="{{base_path}}/login">Kirjaudu</a></li> %}
+                <li><a href="{{base_path}}/kayttajalista">Käyttäjät</a></li>
+            {% endif %}
 
             <li>
               <form class="form-inline">              
@@ -59,6 +58,18 @@
                 <button type="submit" class="btn btn-primary">Hae</button>
               </form>
             </li>
+
+            {% if user_logged_in %}              
+                <form class="navbar-form navbar-right" method="post" 
+                action="{{base_path}}/logout">
+                  <button type="submit" class="btn btn-default">
+                    Kirjaudu ulos
+                  </button>
+                </form>              
+            {% else %}
+              <li><a href="{{base_path}}/login">Kirjaudu</a></li> 
+            {% endif %} 
+
           </ul>
         </div>
       </div>

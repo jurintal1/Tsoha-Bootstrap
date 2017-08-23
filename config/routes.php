@@ -1,5 +1,9 @@
 <?php
 
+  function check_logged_in(){
+    BaseController::check_logged_in();
+  }
+
   $routes->get('/', function() {
     RecipeController::index();
   });
@@ -15,34 +19,46 @@
     RecipeController::show($id);
   });
 
-   $routes->get('/resepti/:id/muokkaa', function($id) {
+   $routes->get('/resepti/:id/muokkaa','check_logged_in', function($id) {
     RecipeController::edit($id);
   });
 
 
-  $routes->post('/resepti/:id/muokkaa', function($id) {
+  $routes->post('/resepti/:id/muokkaa', 'check_logged_in', function($id) {
     RecipeController::update($id);
   });
 
-  $routes->post('/resepti/:id/poista', function($id) {
+  $routes->post('/resepti/:id/poista', 'check_logged_in', function($id) {
     RecipeController::delete($id);
   });
 
 
 
 
-  $routes->get('/lisaa_resepti', function() {
+  $routes->get('/lisaa_resepti','check_logged_in', function() {
     RecipeController::add();
   });
 
-  $routes->post('/lisaa_resepti', function() {
+  $routes->post('/lisaa_resepti', 'check_logged_in', function() {
     RecipeController::store();
   });
 
 
+  $routes->get('/lisaa_kayttaja', 'check_logged_in', function() {
+    UserAccountController::add();
+  });
 
-  $routes->get('/muokkaa_kayttajaa', function() {
-    HelloWorldController::editUser();
+  $routes->post('/lisaa_kayttaja', 'check_logged_in', function() {
+    UserAccountController::store();
+  });
+
+
+  $routes->get('/kayttaja/:id/muokkaa', 'check_logged_in', function() {
+    UserAccountController::editUser($id);
+  });
+
+  $routes->post('/kayttaja/:id/muokkaa', 'check_logged_in', function() {
+    UserAccountController::delete($id);
   });
 
   $routes->get('/login', function() {
@@ -53,9 +69,23 @@
     UserAccountController::handle_login();
   });
 
-  $routes->get('/kayttajalista', function() {
+  $routes->get('/kayttajalista', 'check_logged_in', function() {
     UserAccountController::index();
   });
+
+  $routes->post('/logout', function(){
+    UserAccountController::logout();
+  });
+
+  $routes->get('/ainesosat', function(){
+    IngredientController::ingredientList();
+  });
+
+  $routes->get('/ainesosa/:id', function($id) {
+    IngredientController::showRecipes($id);
+  });
+
+
 
 
 

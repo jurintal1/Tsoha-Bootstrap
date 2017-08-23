@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjätunnuspyyntö</h1>
+
+  <form method="post" action="{{base_path}}/lisaa_kayttaja">    
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" class="form-control" value="{{attributes.name}}">
+    </div>
+    
+    <div class="form-group">
+      <label>salasana</label>
+      <input type="text" class="form-control" value="{{attributes.password}}">
+    </div>      
+
+
+    <div class="btn-group-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

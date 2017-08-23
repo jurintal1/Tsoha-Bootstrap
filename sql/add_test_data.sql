@@ -1,7 +1,7 @@
-INSERT INTO UserAccount (name, password, role) VALUES ('Jussi', 'kaakkuri', '0');
-INSERT INTO UserAccount (name, password, role) VALUES ('Sirpa', 'laama', '1');
-INSERT INTO UserAccount (name, password, role, active) VALUES ('Sorsa', 'hanhi', '0', true);
-INSERT INTO UserAccount (name, password, role) VALUES ('admin', 'Helsinki1977', '0', true);
+INSERT INTO UserAccount (name, password, role) VALUES ('Jussi', 'kaakkuri', 1);
+INSERT INTO UserAccount (name, password, role, active) VALUES ('Sirpa', 'laama', 2, true);
+INSERT INTO UserAccount (name, password, role, active) VALUES ('Sorsa', 'hanhi', 1, true);
+INSERT INTO UserAccount (name, password, role, active) VALUES ('Tero', 'Helsinki1977', 	1, false);
 
 INSERT INTO Recipe (author, name, timeAdded) 
 	VALUES ((SELECT id FROM UserAccount WHERE name = 'Jussi'), 'Pelkkä piimä', now());

@@ -60,6 +60,55 @@ class Recipe extends BaseModel
     	return null;
   	}
 
+
+    public static function findIngredient($id) {
+      $query = DB::connection()->prepare
+        ('SELECT DISTINCT * FROM Recipe
+          INNER JOIN 
+          (SELECT * FROM RecipeIngredient
+           WHERE ingredient_id = :id) AS RecipeIngredient
+           ON Recipe.id = RecipeIngredient.recipe_id'
+        );
+      $query->execute(array('id' => $id));
+      $rows = $query->fetchAll();
+      $recipes = array();
+      
+
+      foreach($rows as $row){     
+        $recipes[] = new Recipe(array(
+          'id' => $row['id'],
+          'author' => $row['author'],
+          'name' => $row['name'],
+          'instructions' => $row['instructions'],
+          'glass' => $row['glass'],
+          'method' => $row['method'],
+          'timeAdded' => $row['timeadded']
+          ));
+      }
+      return $recipes;
+      
+    }
+
+    public static function findName($name) {
+      $query = DB::connection()->prepare
+        ('SELECT * FROM Recipe WHERE name = :name LIMIT 1');
+      $query->execute(array('name' => $name));
+      $row = $query->fetch();
+      if ($row) {
+        $recipe = new Recipe(array(
+          'id' => $row['id'],
+          'author' => $row['author'],
+          'name' => $row['name'],
+          'instructions' => $row['instructions'],
+          'glass' => $row['glass'],
+          'method' => $row['method'],
+          'timeAdded' => $row['timeadded']
+          ));
+          return $recipe;
+      }
+      return null;            
+    }
+
     
 
 
@@ -116,12 +165,16 @@ class Recipe extends BaseModel
   		}
 
   		if (!$this -> validate_string_not_empty($this->name)){
-  			$errors[] = "Lisää nimi!";
+  			$errors[] = "Anna reseptille nimi!";
   		}
 
   		if (!$this -> validate_string_max_length($this->name, 50)){
   			$errors[] = "Liian pitkä nimi!";
   		}
+
+      if (Recipe::findName($this->name)) {
+        $errors[] = "Nimi on jo käytössä.";
+      }
 
   		return $errors;
   	}
@@ -172,9 +225,6 @@ class Recipe extends BaseModel
   		return $errors;
   	}
 
-    public function validate_ingredients() {
-
-    }
 
 
     public function getAuthorName() {

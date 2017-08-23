@@ -9,7 +9,9 @@ class RecipeIngredient extends BaseModel
 	function __construct($attributes)
 	{
 		parent::__construct($attributes);
+    $this->validators = array('validate_quantity', 'validate_recipe_id', 'validate_ingredient_id');
 	}
+
 
 	public static function find($recipe_id)
     {
@@ -32,4 +34,42 @@ class RecipeIngredient extends BaseModel
     	$ingredient = Ingredient::find($this->ingredient_id);
     	return $ingredient->name;
     }
-}
+
+    public function validate_quantity() {    
+      if (!$this -> validate_string_max_length($this->quantity, 50)) {
+        $errors[] = "Määrä-kentässä liikaa selitystä, vähempikin riittäisi.";
+      }
+    }
+
+    public function validate_recipe_id() {
+      $errors = array();
+      if(!is_numeric($this->recipe_id)) {
+        $errors[] = "Reseptin tunniste ei kelpaa!";
+      }
+      return $errors;
+    }
+
+    public function validate_ingredient_id() {
+      $errors = array();
+      if(!is_numeric($this->ingredient_id)) {
+        $errors[] = "Ainesosan tunniste ei kelpaa!";
+      }
+      return $errors;
+    }
+
+    public function save() {
+      $query=DB::connection()->prepare(
+        'INSERT INTO RecipeIngredient(quantity, recipe_id, ingredient_id)
+          VALUES(:quantity, :recipe_id, :ingredient_id)'  
+        );
+
+      $query->execute(array(
+        'quantity' => $this->quantity,
+        'recipe_id' => $this->recipe_id,
+        'ingredient_id' => $this->ingredient_id
+        ));      
+    }
+
+
+
+  }

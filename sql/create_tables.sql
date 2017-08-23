@@ -2,7 +2,7 @@ CREATE TABLE UserAccount(
 id serial PRIMARY KEY,
 name varchar(50) UNIQUE NOT NULL,
 password varchar(50) UNIQUE NOT NULL,
-role integer NOT NULL CHECK(role < 2),
+role integer NOT NULL CHECK(role < 3),
 active boolean DEFAULT false NOT NULL
 );
 
