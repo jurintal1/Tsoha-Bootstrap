@@ -35,7 +35,10 @@
 		        'glass' => trim($params['glass']),
 		        'method' => trim($params['method'])
 				);
-			$recipe = new Recipe($attributes); 
+			$recipe = new Recipe($attributes);
+			if (Recipe::findName($recipe->name)) {
+				$errors[] = "Nimi on jo käytössä!";
+			} 
 	        $errors = $recipe->errors();
 	        if (count($errors) == 0) {
 	        	$recipe->save();

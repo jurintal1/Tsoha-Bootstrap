@@ -6,7 +6,7 @@
 
   <h1>{{recipe.name|e}}</h1>
   
-  {% if (user_logged_in.role == 0) %}
+  {% if (user_logged_in.role == 1) %}
   <p> 
     <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/poista">
       <button type="submit" class="btn btn-danger">Poista</button>

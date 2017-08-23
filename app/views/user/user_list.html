@@ -8,27 +8,26 @@
       <td>Nimi</td>      
       <td>Käyttäjätaso</td>
       <td>Aktiivinen</td>
-      <td></td> 
     </tr>      
     </thead>
 
-    <tbody>      
+    <tbody>
+    {% for user in users %}      
       <tr>
-        <td>{{user.name|e}}</td>
+        <td>
+          <a href="{{base_path}}/kayttaja/{{user.id}}">{{user.name|e}}
+        </td>
         <td>{{user.role|e}}</td>
         <td>
           {% if user.active %}
             x          
           {% endif %}
-        </td>
-
-        <td>0</td>
-        <td>
-          <button method="post" action="{{base_path}}/kayttaja/{{}}   class="btn btn-default">Muokkaa</button>       
-          <button method="post" class="btn btn-default">Poista</button>       
+        </td>      
       </tr>
+    {% endfor %}
       
     </tbody>
+    
   </table>
  
 

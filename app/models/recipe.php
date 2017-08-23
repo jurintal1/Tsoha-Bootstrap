@@ -170,18 +170,14 @@ class Recipe extends BaseModel
 
   		if (!$this -> validate_string_max_length($this->name, 50)){
   			$errors[] = "Liian pitkä nimi!";
-  		}
-
-      if (Recipe::findName($this->name)) {
-        $errors[] = "Nimi on jo käytössä.";
-      }
+  		}      
 
   		return $errors;
   	}
 
   	public function validate_instructions() {
       $errors = array();  		
-  		if (!$this -> validate_string_max_length($this->instructions, 50)){
+  		if (!$this -> validate_string_max_length($this->instructions, 1000)){
   			$errors[] = "Liian pitkä ohje!";
   		}
   		if (!$this -> validate_string_min_length($this->instructions, 3)

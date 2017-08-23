@@ -8,13 +8,7 @@
     RecipeController::index();
   });
 
-  $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-  });
-
-
-
-
+  
   $routes->get('/resepti/:id', function($id) {
     RecipeController::show($id);
   });

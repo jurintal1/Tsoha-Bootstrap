@@ -64,6 +64,7 @@ class UserAccount extends BaseModel
         	'id' => $row['id'],
 	        'name' => $row['name'],
 	        'password' => $row['password'],
+	        'role' => $row['role'],
 	        'active' => $row['active']	        	        
 	        ));  
 

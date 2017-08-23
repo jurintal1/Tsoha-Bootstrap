@@ -46,18 +46,12 @@
             <li><a href="{{base_path}}/lisaa_resepti">
                 Lisaa resepti
             </a></li> 
-            <li>{{user_logged_in.role|e}}</li>
-            {% if user_logged_in.role == '1' %}
-            <li><a href="{{base_path}}/login">Kirjaudu</a></li> %}
+            
+            {% if user_logged_in.role == 1 %}            
                 <li><a href="{{base_path}}/kayttajalista">Käyttäjät</a></li>
             {% endif %}
 
-            <li>
-              <form class="form-inline">              
-                <input class="form-control" name="search" type="text">
-                <button type="submit" class="btn btn-primary">Hae</button>
-              </form>
-            </li>
+            
 
             {% if user_logged_in %}              
                 <form class="navbar-form navbar-right" method="post" 
