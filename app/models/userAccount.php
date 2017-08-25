@@ -7,6 +7,7 @@ class UserAccount extends BaseModel
 	function __construct($attributes)
 	{
 		parent::__construct($attributes);
+		$this->validators = array('validate_name', 'validate_password');
 	}
 
 
@@ -52,8 +53,7 @@ class UserAccount extends BaseModel
 	}
 
 
-  	public static function find($id)
-  	{
+  	public static function find($id) {
     	$query = DB::connection()->prepare
     		('SELECT * FROM UserAccount WHERE id = :id LIMIT 1');
     	$query->execute(array('id' => $id));
@@ -70,10 +70,10 @@ class UserAccount extends BaseModel
 
       		return $user;
     	}
-
-    	return null;
-    	
+    	return null;    	
   	}
+
+
 
   	  	public static function findName($name)	{
 	    	$query = DB::connection()->prepare
@@ -94,12 +94,12 @@ class UserAccount extends BaseModel
 	    	return null;
   		}
 
-  		public static function authenticate($name, $password) {
-  				
-  			$query = DB::connection()->prepare
+  		public static function authenticate($name, $password) {  			$query = DB::connection()->prepare
   				('SELECT * FROM UserAccount WHERE name = :name AND password = :password
   				LIMIT 1');
-  			$query->execute(array('name' => $name, 'password' => $password));
+  			$query->execute(
+  				array('name' => $name, 'password' => $password)
+  				);
   			$row = $query->fetch();
   			if($row['active']) {
   			  $UserAccount = new UserAccount(array(
@@ -117,9 +117,9 @@ class UserAccount extends BaseModel
 
   		public function validate_name() {
 	  		$errors = array();
-	  		if (!$this -> validate_string_min_length($this->name, 8)
+	  		if (!$this -> validate_string_min_length($this->name, 5)
 	  			&& $this -> validate_string_not_empty($this->name)) {
-	  			$errors[] = "Käyttäjätunnuksen pitää olla vähintään kahdeksan merkin pituinen";
+	  			$errors[] = "Käyttäjätunnuksen pitää olla vähintään viiden merkin pituinen";
 	  		}
 
 	  		if (!$this -> validate_string_not_empty($this->name)){
@@ -136,25 +136,52 @@ class UserAccount extends BaseModel
 
 
   		public function validate_password() {
-  		$errors = array();
-  		if (!$this -> validate_string_min_length($this->password, 10)
-  			&& $this -> validate_string_not_empty($this->password)) {
-  			$errors[] = "Salasanan pitää olla vähintään kymmenen merkin pituinen";
+	  		$errors = array();
+	  		if (!$this -> validate_string_min_length($this->password, 10)
+	  			&& $this -> validate_string_not_empty($this->password)) {
+	  			$errors[] = "Salasanan pitää olla vähintään kymmenen merkin pituinen";
+	  		}
+
+	  		if (!$this -> validate_string_not_empty($this->password)){
+	  			$errors[] = "Lisää salasana!";
+	  		}
+
+	  		if (!$this -> validate_string_max_length($this->name, 50)){
+	  			$errors[] = "Liian pitkä salasana!";
+	  		}
+
+	  		if ($this->password == $this->name){
+	  			$errors[] = "Salasana ei saa olla sama kuin käyttäjätunnus";
+	  		}
+	  		return $errors;
   		}
 
-  		if (!$this -> validate_string_not_empty($this->password)){
-  			$errors[] = "Lisää salasana!";
-  		}
 
-  		if (!$this -> validate_string_max_length($this->name, 50)){
-  			$errors[] = "Liian pitkä salasana!";
-  		}
+	  	public function save() {
+	      $query=DB::connection()->prepare(
+	        'INSERT INTO UserAccount (name, password, role) VALUES (:name, :password, 1) RETURNING id'
+	        );
+	      $query->execute(array(
+	      	'name' => $this->name, 'password' => $this->password
+	      	));
+	      $row = $query->fetch();
+	      $this->id = $row['id'];
+	    }
 
-  		if ($this->password == $this.name){
-  			$errors[] = "Salasana ei saa olla sama kuin käyttäjätunnus";
-  		}
 
-  		return $errors;
-  	}
+	    public function update() { 		
+  		$query=DB::connection()->prepare(
+  			'UPDATE UserAccount
+        	SET name = :name, password = :password, role =:role,
+           	active = :active WHERE id=:id' 				
+  			);      		    
+   		$query->execute(array(
+   			'id' => $this->id,
+   			'name' => $this->name,
+   			'password' => $this->password,
+   			'role' => $this->role,
+   			'active' => $this->active			
+   			)); 		
+  		}
 
 }

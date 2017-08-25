@@ -37,12 +37,11 @@
     RecipeController::store();
   });
 
-
-  $routes->get('/lisaa_kayttaja', 'check_logged_in', function() {
+  $routes->get('/lisaa_kayttaja', function() {
     UserAccountController::add();
   });
 
-  $routes->post('/lisaa_kayttaja', 'check_logged_in', function() {
+  $routes->post('/lisaa_kayttaja', function() {
     UserAccountController::store();
   });
 
@@ -51,9 +50,11 @@
     UserAccountController::edit($id);
   });
 
-  $routes->post('/kayttaja/:id/muokkaa', 'check_logged_in', function() {
-    UserAccountController::delete($id);
+  $routes->post('/kayttaja/:id', 'check_logged_in', function($id) {
+    UserAccountController::update($id);
   });
+
+
 
   $routes->get('/login', function() {
     UserAccountController::login();

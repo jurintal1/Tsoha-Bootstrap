@@ -147,8 +147,7 @@ class Recipe extends BaseModel
    			'instructions' => $this->instructions,
    			'glass' => $this->glass,
    			'method' => $this->method 			
-   			));
- 		
+   			)); 		
   	}
 
 
