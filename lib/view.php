@@ -5,6 +5,7 @@
     public static function make($view, $content = array()){
       // Alustetaan Twig
       $twig = self::get_twig();
+      $twig->addExtension(new Twig_Extensions_Extension_Text());
 
       try{
         // Asetetaan uudelleenohjauksen yhteydessä lisätty viesti

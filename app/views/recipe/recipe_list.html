@@ -19,7 +19,7 @@
               {{recipe.name|e}}</a</a>
             </td>
           <td>{{recipe.getAuthorName()|e}}</td> 
-           <td>{{recipe.timeAdded|e}}</td>       
+           <td>{{recipe.timeAdded| truncate(10, false, "") | e}}</td>       
         </tr>
       {% endfor %}
     </tbody>

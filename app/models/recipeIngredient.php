@@ -70,6 +70,20 @@ class RecipeIngredient extends BaseModel
         ));      
     }
 
+    public function destroy() {    
+      $query=DB::connection()->prepare(
+        'DELETE from RecipeIngredient 
+        WHERE recipe_id = :recipe_id AND ingredient_id = :ingredient_id'
+        );
+      $query->execute(array(
+        'recipe_id' => $this->recipe_id,
+        'ingredient_id' => $this->ingredient_id
+        ));
+            
+      
+
+    }
+
 
 
   }

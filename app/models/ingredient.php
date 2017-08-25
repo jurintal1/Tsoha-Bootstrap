@@ -85,10 +85,30 @@ class Ingredient extends BaseModel {
 
     public function save() {
       $query=DB::connection()->prepare(
-        'INSERT INTO Ingredient(name) VALUES(:name) RETURNING id'
+        'INSERT INTO Ingredient (name) VALUES (:name) RETURNING id'
         );
       $query->execute(array('name' => $this->name));
       $row = $query->fetch();
       $this->id = $row['id'];
+    }
+
+    public static function removeIfNotUsed($id) {
+      $query=DB::connection()->prepare(
+        'SELECT * from RecipeIngredient 
+        WHERE ingredient_id = :ingredient_id'
+        );
+      $query->execute(array(        
+        'ingredient_id' => $id));
+      $rows = $query->fetchAll();
+      if (!$rows) {
+        $query=DB::connection()->prepare(
+          'DELETE from INGREDIENT WHERE id = :id'
+        );
+        $query->execute(array('id' => $id));
+      }
+    }
+
+    public function destroy() {    
+          
     }
 }

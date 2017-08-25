@@ -78,18 +78,21 @@
 		        'method' => $params['method']
 				);
 			$recipe = new Recipe($attributes); 
-	        $errors = $recipe->errors();
-	        
-	        if (count($errors) == 0) {	        
+	        $errors = $recipe->errors();	        
+	               
+	        if (count($errors) == 0) {
 	        	$recipe->update();
-	        	Redirect::to('/resepti/' . $recipe->id, array('message' => 'Reseptin muokkaaminen onnistui.'));
+	        	RecipeIngredientController::update($recipe);
 	        } else {
-	        	View::make('/recipe/edit_recipe.html', array('errors' => $errors,
-	        	 'recipe' => $recipe));
-	        }       
+	        	View::make('/resepti/' . $id . '/muokkaa', array(
+	        		'errors' => $errors,
+	           		'params' => $params,
+	           		'recipe' => $recipe	           		
+	           		));
+	        }     
 
 
-	        //lisäksi käsiteltävä ainesosat
+	        
 	        
 
 		}
