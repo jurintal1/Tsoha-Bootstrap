@@ -11,7 +11,7 @@ class Ingredient extends BaseModel {
 
 
   public static function all() {    
-    $query = DB::connection()->prepare('SELECT * FROM Ingredient');    
+    $query = DB::connection()->prepare('SELECT * FROM Ingredient ORDER BY Name ASC');    
     $query->execute();    
     $rows = $query->fetchAll();
     $ingredients = array();
