@@ -1,46 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>Muokkaa käyttäjää {{userAccount.name|e}}</h1>
+{% if errors %}
+<div class="alert alert-danger">
+  <ul>
+    {% for error in errors %}
+    <li>{{error}}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
-  <form method="post" action="{{base_path}}/kayttaja/{{userAccount.id}}">    
-    <div class="form-group">
-      <label>Käyttäjätunnus</label>
-      <input type="text" name="name" class="form-control" value="{{userAccount.name|e}}">
-    </div>
-    
-    <div class="form-group">
-      <label>Käyttäjän salasana</label>
-      <input type="text" name="password" class="form-control" value="{{userAccount.password|e}}">
-    </div>   
-    
+<h1>Muokkaa käyttäjää {{userAccount.name|e}}</h1>
 
-    <div class="radio">
-      <label><input type="radio" name="role" value="1"
+<form method="post" action="{{base_path}}/kayttaja/{{userAccount.id}}">    
+  <div class="form-group">
+    <label>Käyttäjätunnus</label>
+    <input type="text" name="name" class="form-control" value="{{userAccount.name|e}}">
+  </div>
+  
+  <div class="form-group">
+    <label>Käyttäjän salasana</label>
+    <input type="text" name="password" class="form-control" value="{{userAccount.password|e}}">
+  </div>   
+  
+
+  <div class="radio">
+    <label><input type="radio" name="role" value="1"
       {% if userAccount.role == 1 %} checked {% endif %}>
-      Peruskäyttäjä
-      </label>
+      Admin-käyttäjä
+    </label>
     <div>
-    <div class="radio">   
-      <label>
-        <input type="radio" name="role" value="2"
-        {% if userAccount.role == 2 %} checked {% endif %}>
-          Admin-käyttäjä
-      </label>      
-    </div>
-    <p>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" name="active"
-        {% if userAccount.active %} checked {% endif %}>
-          Aktiivinen
+      <div class="radio">   
+        <label>
+          <input type="radio" name="role" value="2"
+          {% if userAccount.role == 2 %} checked {% endif %}>
+          peruskäyttäjä
         </label>      
-    </div>
-    </p>
-    
+      </div>
+      <p>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="active"
+            {% if userAccount.active %} checked {% endif %}>
+            Aktiivinen
+          </label>      
+        </div>
+      </p>
+      
 
-    <div class="btn-group-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
-    </div>
-  </form>
-{% endblock %}
+      <div class="btn-group-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+      </div>
+    </form>
+    {% endblock %}

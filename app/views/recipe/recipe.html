@@ -4,46 +4,46 @@
   {{message}}
 </div>
 
-  <h1>{{recipe.name|e}}</h1>
-  
-  {% if (user_logged_in.role == 1) %}
-  <p> 
-    <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/poista">
-      <button type="submit" class="btn btn-danger">Poista</button>
-    </form>
-  </p>
-  <p>
-    <form method="get" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
-      <button type="submit" class="btn btn-info">Muokkaa</button>
-    </form>
-  </p>
-  {% endif %} 
-  
-  
-  <ul>
-    <li><strong>Lasi:  </strong>{{recipe.glass|e}}</li>
-    <li><strong>Valmistustapa:  </strong>{{recipe.method|e}}</li>   
-    <li><strong>Lisääjä:  </strong>{{recipe.getAuthorName()|e}}</li>   
-    <li><strong>Lisäyspäivä:  </strong>{{recipe.timeAdded|e}}</li>  
-  </ul>
-  
-  <p>
+<h1>{{recipe.name|e}}</h1>
+
+{% if (user_logged_in.role == 1) %}
+<p> 
+  <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/poista">
+    <button type="submit" class="btn btn-danger">Poista</button>
+  </form>
+</p>
+<p>
+  <form method="get" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
+    <button type="submit" class="btn btn-info">Muokkaa</button>
+  </form>
+</p>
+{% endif %} 
+
+
+<ul>
+  <li><strong>Lasi:  </strong>{{recipe.glass|e}}</li>
+  <li><strong>Valmistustapa:  </strong>{{recipe.method|e}}</li>   
+  <li><strong>Lisääjä:  </strong>{{recipe.getAuthorName()|e}}</li>   
+  <li><strong>Lisäyspäivä:  </strong>{{recipe.timeAdded| truncate(10, false, "") | e}}</li>  
+</ul>
+
+<p>
   <table class="table table-hover table-bordered">
     <thead>      
     </thead>
 
     <tbody>
-    
+      
       {% for recipeIngredient in recipeIngredients %}            
-        <tr>
-          <td style="width:50px">{{recipeIngredient.quantity|e}}</td>
-          <td style="width:50px">{{recipeIngredient.getIngredientName()|e}}</td>
-        </tr>
+      <tr>
+        <td style="width:50px">{{recipeIngredient.quantity|e}}</td>
+        <td style="width:50px">{{recipeIngredient.getIngredientName()|e}}</td>
+      </tr>
       {% endfor %}
 
     </tbody>
   </table>
   
-    {{recipe.instructions|e}}
+  {{recipe.instructions|e}}
   
-{% endblock %}
+  {% endblock %}

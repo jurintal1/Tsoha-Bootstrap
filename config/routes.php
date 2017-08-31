@@ -26,9 +26,6 @@
     RecipeController::delete($id);
   });
 
-
-
-
   $routes->get('/lisaa_resepti','check_logged_in', function() {
     RecipeController::add();
   });
@@ -46,6 +43,7 @@
   });
 
 
+  
   $routes->get('/kayttaja/:id', 'check_logged_in', function($id) {
     UserAccountController::edit($id);
   });
@@ -53,6 +51,7 @@
   $routes->post('/kayttaja/:id', 'check_logged_in', function($id) {
     UserAccountController::update($id);
   });
+
 
 
 

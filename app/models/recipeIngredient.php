@@ -31,8 +31,8 @@ class RecipeIngredient extends BaseModel
     }
 
     public function getIngredientName() {
-    	$ingredient = Ingredient::find($this->ingredient_id);
-    	return $ingredient->name;
+    	$ingredient = Ingredient::find($this->ingredient_id);      
+      return $ingredient->name;
     }
 
     public function validate_quantity() {    

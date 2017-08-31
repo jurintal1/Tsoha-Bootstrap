@@ -1,108 +1,106 @@
 {% extends "base.html" %}
 {% block content %}
 
-  {% if errors %}
-    <div class="alert alert-danger">
-      <ul>
-        {% for error in errors %}
-          <li>{{error}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
-
-  <h1>Muokkaa reseptiä "{{recipe.name}}"</h1>
-
-  
-  <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
-
-    <input type="hidden" name="author" value="{{recipe.author}}">  
-    
-    <div class="form-group row">
-      <div class="col-xs-6"> 
-        <label>Laatija</label>      
-        <input type="text" name="author_name" class="form-control" value="{{recipe.getAuthorName()}}" disabled>        
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="col-xs-6">      
-        <label>Nimi</label>
-        <input class="form-control" name="name" type="text" value="{{recipe.name}}">
-      </div>
-    </div>    
-
-    
-    <div class="form-group row">
-      <div class="col-xs-6">      
-        <label for="glass">Lasi</label>
-        <input class="form-control" name="glass" type="text" value="{{recipe.glass}}">
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <div class="col-xs-6">      
-        <label for="method">Valmistustapa</label>
-        <input class="form-control" name="method" type="text" value="{{recipe.method}}">
-      </div>
-    </div>
-
-    <div class="form-group row"> 
-      <div class="col-xs-8">           
-        <label>Ohje</label>
-        <textarea class="form-control" rows="3" name="instructions" type="text">
-          {{recipe.instructions}}
-        </textarea>
-      </div>
-    </div>
-
-
-    <div class="form-group row">
-      <div class="col-xs-6">     
-        <h3>Ainesosat</h3>
-      </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-xs-2">
-          <label>Määrä</label>
-        </div>
-        <div class="col-xs-6">
-          <label>Ainesosa</label>
-        </div>
-      </div>
-
-    {% set i = 1 %}
-    {% for recipeIngredient in recipeIngredients %}    
-      <div class="form-group row">
-        <div class="col-xs-2">
-          <input class="form-control" name="quantity{{i|e}}" type="text" value="{{recipeIngredient.quantity|e}}">
-        </div>
-        <div class="col-xs-6">
-          <input class="form-control" name="ingredient{{i|e}}" type="text" value="{{recipeIngredient.getIngredientName()}}">          
-        </div>
-      </div>
-      {% set i = i + 1 %}
+{% if errors %}
+<div class="alert alert-danger">
+  <ul>
+    {% for error in errors %}
+    <li>{{error}}</li>
     {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
-    {% for j in i..10 %}
-      <div class="form-group row">
-        <div class="col-xs-2">          
-          <input class="form-control" name="quantity{{j|e}}" type="text"
-             value="{{params.quantity}}">
-        </div>
-        <div class="col-xs-6">          
-          <input class="form-control" name="ingredient{{j|e}}" type="text"
-            value="{{recipeIngredient.getIngredientName()}}">
-        </div>
-      </div>    
-    {% endfor %}
 
-    
-    <div class="btn-group-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+<h1>Muokkaa reseptiä {{recipe.name}}</h1>
+
+
+<form method="post" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
+
+  <input type="hidden" name="author" value="{{recipe.author}}">  
+
+  <div class="form-group row">
+    <div class="col-xs-6"> 
+      <label>Laatija</label>      
+      <input type="text" name="author_name" class="form-control" value="{{recipe.getAuthorName()}}" disabled>        
     </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-xs-6">      
+      <label>Nimi</label>
+      <input class="form-control" name="name" type="text" value="{{recipe.name}}">
+    </div>
+  </div>    
 
 
-  </form>
+  <div class="form-group row">
+    <div class="col-xs-6">      
+      <label for="glass">Lasi</label>
+      <input class="form-control" name="glass" type="text" value="{{recipe.glass}}">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-xs-6">      
+      <label for="method">Valmistustapa</label>
+      <input class="form-control" name="method" type="text" value="{{recipe.method}}">
+    </div>
+  </div>
+
+  <div class="form-group row"> 
+    <div class="col-xs-8">           
+      <label>Ohje</label>
+      <textarea class="form-control" rows="3" name="instructions" type="text">
+        {{recipe.instructions | e}}
+      </textarea>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <div class="col-xs-6">     
+      <h3>Ainesosat</h3>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-xs-2">
+      <label>Määrä</label>
+    </div>
+    <div class="col-xs-6">
+      <label>Ainesosa</label>
+    </div>
+  </div>
+
+  {% set i = 1 %}
+  {% for recipeIngredient in recipeIngredients %}    
+  <div class="form-group row">
+    <div class="col-xs-2">
+      <input class="form-control" name="quantity{{i|e}}" type="text" value="{{recipeIngredient.quantity}}">
+    </div>
+    <div class="col-xs-6">
+    <input class="form-control" name="ingredient{{i|e}}" type="text" value="{{recipeIngredient.getIngredientName()}}">          
+    </div>
+  </div>
+  {% set i = i + 1 %}
+  {% endfor %}
+
+  {% for j in i..10 %}
+  <div class="form-group row">
+    <div class="col-xs-2">          
+      <input class="form-control" name="quantity{{j|e}}" type="text">
+    </div>
+    <div class="col-xs-6">          
+      <input class="form-control" name="ingredient{{j|e}}" type="text">
+    </div>
+  </div>    
+  {% endfor %}
+
+
+  <div class="btn-group-group">
+    <button type="submit" class="btn btn-primary">Tallenna</button>
+  </div>
+
+
+</form>
 {% endblock %}
