@@ -92,9 +92,11 @@ public static function findName($name) {
   $query = DB::connection()->prepare
   ('SELECT * FROM Recipe WHERE LOWER(name) = LOWER(:name) LIMIT 1');
   $query->execute(array('name' => $name));
-  $row = $query->fetch();
-  if ($row) {
-    $recipe = new Recipe(array(
+  $rows = $query->fetchAll();
+  $recipes = array();  
+
+  foreach($rows as $row){     
+    $recipes[] = new Recipe(array(
       'id' => $row['id'],
       'author' => $row['author'],
       'name' => $row['name'],
@@ -103,9 +105,31 @@ public static function findName($name) {
       'method' => $row['method'],
       'timeAdded' => $row['timeadded']
       ));
-    return $recipe;
   }
-  return null;            
+  return $recipes;              
+}
+
+
+
+public static function findAuthor($author_id) {
+  $query = DB::connection()->prepare
+  ('SELECT * FROM Recipe WHERE author = :author');
+  $query->execute(array('author' => $author_id));
+  $rows = $query->fetchAll();
+  $recipes = array();  
+
+  foreach($rows as $row){     
+    $recipes[] = new Recipe(array(
+      'id' => $row['id'],
+      'author' => $row['author'],
+      'name' => $row['name'],
+      'instructions' => $row['instructions'],
+      'glass' => $row['glass'],
+      'method' => $row['method'],
+      'timeAdded' => $row['timeadded']
+      ));
+  }
+  return $recipes;             
 }
 
 
@@ -155,35 +179,36 @@ public function destroy() {
   $query->execute(array('id' => $this->id));    
 }
 
+
+
 public function validate_name() {
   $errors = array();
-  if (!$this -> validate_string_min_length($this->name, 2)
-   && $this -> validate_string_not_empty($this->name)) {
+  if (!$this -> validate_string_min_length($this->name, 2) && $this-> validate_string_not_empty($this->name)) {
    $errors[] = "Liian lyhyt nimi, laita pidempi!";
-}
+ }
 
-if (!$this -> validate_string_not_empty($this->name)){
- $errors[] = "Anna reseptille nimi!";
-}
+ if (!$this -> validate_string_not_empty($this->name)){
+   $errors[] = "Anna reseptille nimi!";
+ }
 
 
-if (!$this -> validate_string_max_length($this->name, 50)){
- $errors[] = "Liian pitkä nimi!";
-}      
+ if (!$this -> validate_string_max_length($this->name, 50)){
+   $errors[] = "Liian pitkä nimi!";
+ }      
 
-return $errors;
+ return $errors;
 }
 
 public function validate_instructions() {
   $errors = array();  		
-  if (!$this -> validate_string_max_length($this->instructions, 1000)){
+  if (!$this -> validate_string_max_length($this->instructions, 1000)) {
    $errors[] = "Liian pitkä ohje!";
  }
- if (!$this -> validate_string_min_length($this->instructions, 3)
-   && $this -> validate_string_not_empty($this->instructions)){
+
+ if (!$this -> validate_string_min_length($this->instructions, 3) && $this -> validate_string_not_empty($this->instructions)) {
    $errors[] = "Liian lyhyt ohje!";
-}
-return $errors;
+ }
+ return $errors;
 
 }
 

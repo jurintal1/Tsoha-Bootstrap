@@ -107,7 +107,5 @@ public static function removeIfNotUsed($id) {
   }
 }
 
-public function destroy() {    
 
-}
 }

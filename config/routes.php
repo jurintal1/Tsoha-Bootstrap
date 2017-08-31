@@ -52,6 +52,10 @@
     UserAccountController::update($id);
   });
 
+  $routes->post('/kayttaja/:id/poista', 'check_logged_in', function($id) {
+    UserAccountController::delete($id);
+  });
+
 
 
 
@@ -63,13 +67,15 @@
     UserAccountController::handle_login();
   });
 
-  $routes->get('/kayttajalista', 'check_logged_in', function() {
+  $routes->get('/kayttajat', 'check_logged_in', function() {
     UserAccountController::index();
   });
 
   $routes->post('/logout', function(){
     UserAccountController::logout();
   });
+
+  
 
   $routes->get('/ainesosat', function(){
     IngredientController::ingredientList();

@@ -18,12 +18,12 @@
     <label>Käyttäjätunnus</label>
     <input type="text" name="name" class="form-control" value="{{userAccount.name|e}}">
   </div>
-  
+
   <div class="form-group">
     <label>Käyttäjän salasana</label>
     <input type="text" name="password" class="form-control" value="{{userAccount.password|e}}">
   </div>   
-  
+
 
   <div class="radio">
     <label><input type="radio" name="role" value="1"
@@ -47,10 +47,18 @@
           </label>      
         </div>
       </p>
-      
+
 
       <div class="btn-group-group">
         <button type="submit" class="btn btn-primary">Tallenna</button>
       </div>
     </form>
+
+    
+    <p> 
+      <form method="post" action="{{base_path}}/kayttaja/{{userAccount.id}}/poista">
+        <button type="submit" class="btn btn-danger">Poista</button>
+      </form>
+    </p>
+    
     {% endblock %}

@@ -1,41 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-    
-    <div>
-      {{message|e}}
-    </div>
-    <div>
-        {{error|e}}
-    </div>
-    
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-md-4">
-                <form class="form-signin" method="post" action="{{base_path}}/login">
-                    <h3 class="form-signin-heading">
-                        Kirjaudu järjestelmään
-                    </h3>
-                    <input type="text" name="name" class="form-control" 
-                        value="{{attributes.name|e}}" 
-                        placeholder="käyttäjätunnus">                    
-                    <input type="password" name="password" 
-                        class="form-control">              
-                    <button class="btn btn-lg btn-primary btn-block" 
-                        type="submit">
-                        Kirjaudu
-                    </button>
-                </form>                
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-4">
-                <br>
-                <a href="{{base_path}}/lisaa_kayttaja">Minulla ei ole käyttäjätunnuksia</a>
-                
-            </div>
-        </div>
 
-    </div> 
+<div>
+  {{message|e}}
+</div>
+<div>
+    {{error|e}}
+</div>
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form-signin" method="post" action="{{base_path}}/login">
+                <h3 class="form-signin-heading">
+                    Kirjaudu järjestelmään
+                </h3>
+                <input type="text" name="name" class="form-control" 
+                value="{{attributes.name|e}}" 
+                placeholder="käyttäjätunnus">                    
+                <input type="password" name="password" 
+                class="form-control">              
+                <button class="btn btn-lg btn-primary btn-block" 
+                type="submit">
+                Kirjaudu
+            </button>
+        </form>                
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <br>
+        <a href="{{base_path}}/lisaa_kayttaja">Minulla ei ole käyttäjätunnuksia</a>
+        
+    </div>
+</div>
+
+</div> 
 {% endblock %}

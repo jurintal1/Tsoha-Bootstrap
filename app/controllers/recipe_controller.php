@@ -91,10 +91,6 @@ class RecipeController extends BaseController {
 
 	public static function delete($id) {
 		$recipe = Recipe::find($id);
-		$recipeIngredients = RecipeIngredient::find($id);
-		foreach ($recipeIngredients as $ri) {
-			$ri->destroy();
-		}
 		$recipe->destroy();
 		Redirect::to('/', array('message'=> 'Resepti poistettu'));
 	}

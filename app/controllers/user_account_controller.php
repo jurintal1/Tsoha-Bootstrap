@@ -27,9 +27,6 @@ class UserAccountController extends BaseController {
 
 
 
-
-
-
 	public static function handle_login() {
 		$params = $_POST;
 		$user = UserAccount::authenticate($params['name'], $params['password']);
@@ -94,5 +91,11 @@ class UserAccountController extends BaseController {
 			Redirect::to('/kayttaja/' . $userAccount->id,
 				array('errors' => $errors, 'attributes' => $userAccount));        	
 		}     
+	}
+
+	public static function delete($id) {
+		$user = UserAccount::find($id);
+		$user->destroy();
+		Redirect::to('/kayttajat', array('message'=> 'Käyttäjä poistettu'));
 	}
 }
