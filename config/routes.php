@@ -1,89 +1,96 @@
 <?php
 
-  function check_logged_in(){
-    BaseController::check_logged_in();
-  }
+function check_logged_in(){
+  BaseController::check_logged_in();
+}
 
-  $routes->get('/', function() {
-    RecipeController::index();
-  });
+function check_admin_logged_in(){
+  BaseController::check_logged_in();
+}
 
-  
-  $routes->get('/resepti/:id', function($id) {
-    RecipeController::show($id);
-  });
-
-   $routes->get('/resepti/:id/muokkaa','check_logged_in', function($id) {
-    RecipeController::edit($id);
-  });
+$routes->get('/', function() {
+  RecipeController::index();
+});
 
 
-  $routes->post('/resepti/:id/muokkaa', 'check_logged_in', function($id) {
-    RecipeController::update($id);
-  });
+$routes->get('/resepti/:id', function($id) {
+  RecipeController::show($id);
+});
 
-  $routes->post('/resepti/:id/poista', 'check_logged_in', function($id) {
-    RecipeController::delete($id);
-  });
-
-  $routes->get('/lisaa_resepti','check_logged_in', function() {
-    RecipeController::add();
-  });
-
-  $routes->post('/lisaa_resepti', 'check_logged_in', function() {
-    RecipeController::store();
-  });
-
-  $routes->get('/lisaa_kayttaja', function() {
-    UserAccountController::add();
-  });
-
-  $routes->post('/lisaa_kayttaja', function() {
-    UserAccountController::store();
-  });
+$routes->get('/resepti/:id/muokkaa','check_admin_logged_in', function($id) {
+  RecipeController::edit($id);
+});
 
 
-  
-  $routes->get('/kayttaja/:id', 'check_logged_in', function($id) {
-    UserAccountController::edit($id);
-  });
+$routes->post('/resepti/:id/muokkaa', 'check_admin_logged_in', function($id) {
+  RecipeController::update($id);
+});
 
-  $routes->post('/kayttaja/:id', 'check_logged_in', function($id) {
-    UserAccountController::update($id);
-  });
+$routes->post('/resepti/:id/poista', 'check_admin_logged_in', function($id) {
+  RecipeController::delete($id);
+});
 
-  $routes->post('/kayttaja/:id/poista', 'check_logged_in', function($id) {
-    UserAccountController::delete($id);
-  });
+$routes->get('/lisaa_resepti','check_logged_in', function() {
+  RecipeController::add();
+});
+
+$routes->post('/lisaa_resepti', 'check_logged_in', function() {
+  RecipeController::store();
+});
+
+$routes->get('/lisaa_kayttaja', function() {
+  UserAccountController::add();
+});
+
+$routes->post('/lisaa_kayttaja', function() {
+  UserAccountController::store();
+});
 
 
 
+$routes->get('/kayttaja/:id', 'check_admin_logged_in', function($id) {
+  UserAccountController::edit($id);
+});
 
-  $routes->get('/login', function() {
-    UserAccountController::login();
-  });
+$routes->post('/kayttaja/:id', 'check_admin_logged_in', function($id) {
+  UserAccountController::update($id);
+});
 
-  $routes->post('/login', function() {
-    UserAccountController::handle_login();
-  });
+$routes->post('/kayttaja/:id/poista', 'check_admin_logged_in', function($id)
+{
+  UserAccountController::delete($id);
+});
 
-  $routes->get('/kayttajat', 'check_logged_in', function() {
-    UserAccountController::index();
-  });
+$routes->get('/kayttajat', 'check_admin_logged_in', function() {
+  UserAccountController::index();
+});
 
-  $routes->post('/logout', function(){
-    UserAccountController::logout();
-  });
 
-  
 
-  $routes->get('/ainesosat', function(){
-    IngredientController::ingredientList();
-  });
 
-  $routes->get('/ainesosa/:id', function($id) {
-    IngredientController::showRecipes($id);
-  });
+$routes->get('/login', function() {
+  UserAccountController::login();
+});
+
+$routes->post('/login', function() {
+  UserAccountController::handle_login();
+});
+
+
+
+$routes->post('/logout', function(){
+  UserAccountController::logout();
+});
+
+
+
+$routes->get('/ainesosat', function(){
+  IngredientController::ingredientList();
+});
+
+$routes->get('/ainesosa/:id', function($id) {
+  IngredientController::showRecipes($id);
+});
 
 
 
