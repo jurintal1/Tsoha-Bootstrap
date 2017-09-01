@@ -20,7 +20,8 @@ Drinkkireseptitietokanta ja web-sovellus, jossa voi hakea reseptejä. Kirjautune
 
 ## Testitunnukset
 
-Tunnus: Sorsa, salasana: hanhi.
+Admin-käyttäjä; tunnus: Sorsa, salasana: hanhi.
+Peruskäyttäjä; tunnus: Sirpa, salasana: perussirpa.
 
 
 
