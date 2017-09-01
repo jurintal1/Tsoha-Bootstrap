@@ -5,7 +5,7 @@ function check_logged_in(){
 }
 
 function check_admin_logged_in(){
-  BaseController::check_logged_in();
+  BaseController::check_admin_logged_in();
 }
 
 $routes->get('/', function() {
@@ -17,7 +17,7 @@ $routes->get('/resepti/:id', function($id) {
   RecipeController::show($id);
 });
 
-$routes->get('/resepti/:id/muokkaa','check_admin_logged_in', function($id) {
+$routes->get('/resepti/:id/muokkaa', 'check_logged_in', function($id) {
   RecipeController::edit($id);
 });
 

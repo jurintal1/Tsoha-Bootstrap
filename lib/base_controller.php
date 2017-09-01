@@ -21,13 +21,20 @@ class BaseController{
 
 
   public static function check_admin_logged_in(){
-    check_logged_in();
-    $user = get_user_logged_in();
+    BaseController::check_logged_in();
+    $user = BaseController::get_user_logged_in();
     if($user->role != 1) {
       Redirect::to('/login', array('message' => 'Kirjaudu admin-tunnuksilla!'));
     }
+  }
 
-
+  public static function check_admin_or_own($recipe) s{
+    $user = BaseController::get_user_logged_in();
+    if($user->role != 1) {
+      if($user->id != $recipe->author) {
+        Redirect::to('/login', array('message' => 'Kirjaudu admin-tunnuksilla!'));
+      }
+    }
   }
 
 }

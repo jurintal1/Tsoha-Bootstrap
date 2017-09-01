@@ -55,7 +55,8 @@ class RecipeController extends BaseController {
 
 
 	public static function edit($id) {
-		$recipe = Recipe::find($id);			
+		$recipe = Recipe::find($id);	
+		BaseController::check_admin_or_own($recipe);		
 		$recipeIngredients = RecipeIngredient::find($id);
 		View::make('recipe/edit_recipe.html',
 			array('recipe' => $recipe, 'recipeIngredients' => $recipeIngredients));
