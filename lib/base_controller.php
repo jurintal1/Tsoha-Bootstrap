@@ -28,7 +28,7 @@ class BaseController{
     }
   }
 
-  public static function check_admin_or_own($recipe) s{
+  public static function check_admin_or_own($recipe) {
     $user = BaseController::get_user_logged_in();
     if($user->role != 1) {
       if($user->id != $recipe->author) {
