@@ -22,8 +22,8 @@ Drinkkireseptitietokanta ja käyttäjähallinnan sisältävä web-sovellus, joss
 
 ## Testitunnukset
 
-Admin-käyttäjä; tunnus: Sorsa, salasana: hanhi.
-Peruskäyttäjä; tunnus: Sirpa, salasana: perussirpa.
+* Admin-käyttäjä; tunnus: Sorsa, salasana: hanhi.
+* Peruskäyttäjä; tunnus: Sirpa, salasana: perussirpa.
 
 
 
