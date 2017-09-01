@@ -7,20 +7,23 @@
 
 ## Työn aihe
 
-Drinkkireseptitietokanta ja web-sovellus, jossa voi hakea reseptejä. Kirjautuneet käyttäjät voivat myös lisätä uusia reseptejä.
+Drinkkireseptitietokanta ja käyttäjähallinnan sisältävä web-sovellus, jossa reseptejä voi luoda, lukea ja muokata.
 
 ## Sivunäkymät
 
 * [Etusivu](https://jurintal.users.cs.helsinki.fi/drinkit/)
-* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti/1)
-* [Reseptin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/resepti/1/muokkaa)
-* [Käyttäjätilin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/muokkaa_kayttajaa)
-* [Käyttäjälista](https://jurintal.users.cs.helsinki.fi/drinkit/kayttajalista)
+* [Resepti](https://jurintal.users.cs.helsinki.fi/drinkit/resepti/7)
+* [Reseptin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/resepti/7/muokkaa)
+* [Käyttäjätilin muokkaus](https://jurintal.users.cs.helsinki.fi/drinkit/kayttaja/1)
+* [Käyttäjälista](https://jurintal.users.cs.helsinki.fi/drinkit/kayttajat)
 * [Kirjautuminen](https://jurintal.users.cs.helsinki.fi/drinkit/login)
+* [Ainesosat](https://jurintal.users.cs.helsinki.fi/drinkit/ainesosat)
+
 
 ## Testitunnukset
 
-Tunnus: Sorsa, salasana: hanhi.
+Admin-käyttäjä; tunnus: Sorsa, salasana: hanhi.
+Peruskäyttäjä; tunnus: Sirpa, salasana: perussirpa.
 
 
 
