@@ -68,6 +68,7 @@ class RecipeController extends BaseController {
 		$attributes = array(
 			'id' => $id,
 			'author' => $params['author'],
+			'timeAdded' => $params['timeAdded'],			
 			'name' => $params['name'],
 			'instructions' => $params['instructions'],
 			'glass' => $params['glass'],
@@ -92,6 +93,7 @@ class RecipeController extends BaseController {
 	public static function delete($id) {
 		$recipe = Recipe::find($id);
 		$recipe->destroy();
+		Ingredient::removeIfNotUsed();
 		Redirect::to('/', array('message'=> 'Resepti poistettu'));
 	}
 }

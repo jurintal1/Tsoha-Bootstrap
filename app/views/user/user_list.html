@@ -1,35 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 {{message|e}} 
- 
- <p>
-  <table class="table table-striped table-bordered">
+
+<p>
+  <table class="table table-hover table-bordered">
     <thead>
-    <tr>
-      <td>Nimi</td>      
-      <td>Käyttäjätaso</td>
-      <td>Aktiivinen</td>
-    </tr>      
+      <tr>
+        <th class="col-xs-6">Nimi</th>
+        <th class="col-xs-2">Peruskäyttäjä</th>
+        <th class="col-xs-2">Admin </th>
+        <th class="col-xs-2">Aktiivinen</th>
+      </tr>      
     </thead>
 
     <tbody>
-    {% for user in users %}      
+      {% for user in users %}      
       <tr>
         <td>
           <a href="{{base_path}}/kayttaja/{{user.id}}">{{user.name|e}}
-        </td>
-        <td>{{user.role|e}}</td>
-        <td>
-          {% if user.active %}
+          </td>
+          <td>
+            {% if user.role == 2 %}
             x          
-          {% endif %}
-        </td>      
-      </tr>
-    {% endfor %}
-      
-    </tbody>
-    
-  </table>
- 
+            {% endif %}
+          </td>
+          <td>
+            {% if user.role == 1 %}
+            x          
+            {% endif %}
+          </td>
+          <td>
+            {% if user.active %}
+            x          
+            {% endif %}
+          </td>      
+        </tr>
+        {% endfor %}
 
-{% endblock %}
+      </tbody>
+
+    </table>
+
+
+    {% endblock %}

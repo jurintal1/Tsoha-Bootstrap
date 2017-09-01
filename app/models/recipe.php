@@ -245,6 +245,10 @@ public function validate_glass() {
  return $errors;
 }
 
+public function removeUnused() {
+  
+}
+
 
 
 public function getAuthorName() {

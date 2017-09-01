@@ -17,12 +17,22 @@
 
 <form method="post" action="{{base_path}}/resepti/{{recipe.id}}/muokkaa">
 
-  <input type="hidden" name="author" value="{{recipe.author}}">  
+  <input type="hidden" name="author" value="{{recipe.author}}"> 
+
+  <input type="hidden" name="timeAdded" value="{{recipe.timeAdded}}"> 
 
   <div class="form-group row">
     <div class="col-xs-6"> 
       <label>Laatija</label>      
       <input type="text" name="author_name" class="form-control" value="{{recipe.getAuthorName()}}" disabled>        
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-xs-6"> 
+      <label>Lisäyspäivä</label>      
+      <input type="text" name="showtime" class="form-control"
+      value="{{recipe.timeAdded|truncate(10,false,'')|e}}" disabled>        
     </div>
   </div>
 

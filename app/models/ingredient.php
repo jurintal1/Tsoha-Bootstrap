@@ -75,12 +75,14 @@ if (!$this -> validate_string_not_empty($this->name)){
 }
 
 if (!$this -> validate_string_max_length($this->name, 50)){
-  $errors[] = "Liian pitkä nimi!";
+  $errors[] = "Ainesosalla on liian pitkä nimi!";
 }
 
 
 return $errors;
 }
+
+
 
 public function save() {
   $query=DB::connection()->prepare(
@@ -91,20 +93,16 @@ public function save() {
   $this->id = $row['id'];
 }
 
-public static function removeIfNotUsed($id) {
+
+
+
+public static function removeIfNotUsed() {
   $query=DB::connection()->prepare(
-    'SELECT * from RecipeIngredient 
-    WHERE ingredient_id = :ingredient_id'
-    );
-  $query->execute(array(        
-    'ingredient_id' => $id));
-  $rows = $query->fetchAll();
-  if (!$rows) {
-    $query=DB::connection()->prepare(
-      'DELETE from INGREDIENT WHERE id = :id'
-      );
-    $query->execute(array('id' => $id));
-  }
+    'DELETE FROM Ingredient 
+    WHERE id NOT IN
+    (SELECT Ingredient_id FROM RecipeIngredient)   
+    ');
+  $query->execute();  
 }
 
 

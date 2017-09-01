@@ -86,7 +86,7 @@ class UserAccountController extends BaseController {
 
 		if (count($errors) == 0) {
 			$userAccount->update();
-			Redirect::to('/kayttajalista', array('message' => 'Käyttäjä päivitetty'));	        	
+			Redirect::to('/kayttajat', array('message' => 'Käyttäjä päivitetty'));	        	
 		} else {
 			Redirect::to('/kayttaja/' . $userAccount->id,
 				array('errors' => $errors, 'attributes' => $userAccount));        	

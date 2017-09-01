@@ -50,7 +50,7 @@ class RecipeIngredientController extends BaseController {
 				'errors' => $errors,
 				'params' => $params,	           		
 				));
-			Kint::dump($recipe);
+			
 		}
 
 	}

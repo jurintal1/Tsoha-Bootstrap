@@ -9,7 +9,7 @@ class RecipeIngredient extends BaseModel
 	function __construct($attributes)
 	{
 		parent::__construct($attributes);
-    $this->validators = array('validate_quantity', 'validate_recipe_id', 'validate_ingredient_id');
+    $this->validators = array('validate_quantity');
 	}
 
 
@@ -41,21 +41,6 @@ class RecipeIngredient extends BaseModel
       }
     }
 
-    public function validate_recipe_id() {
-      $errors = array();
-      if(!is_numeric($this->recipe_id)) {
-        $errors[] = "Reseptin tunniste ei kelpaa!";
-      }
-      return $errors;
-    }
-
-    public function validate_ingredient_id() {
-      $errors = array();
-      if(!is_numeric($this->ingredient_id)) {
-        $errors[] = "Ainesosan tunniste ei kelpaa!";
-      }
-      return $errors;
-    }
 
     public function save() {
       $query=DB::connection()->prepare(

@@ -13,7 +13,7 @@ class UserAccount extends BaseModel
 
 	public static function all()
 	{    
-		$query = DB::connection()->prepare('SELECT * FROM UserAccount');    
+		$query = DB::connection()->prepare('SELECT * FROM UserAccount ORDER BY Name ASC');    
 		$query->execute();    
 		$rows = $query->fetchAll();
 		$users = array();

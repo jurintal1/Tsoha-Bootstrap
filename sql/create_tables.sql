@@ -22,7 +22,7 @@ name varchar(50) UNIQUE NOT NULL
 );
 
 CREATE TABLE RecipeIngredient(
-recipe_id integer REFERENCES Recipe(id) NOT NULL ON DELETE CASCADE,
+recipe_id integer REFERENCES Recipe(id) ON DELETE CASCADE NOT NULL,
 ingredient_id integer REFERENCES Ingredient(id) NOT NULL,
 quantity varchar(50),
 UNIQUE (recipe_id, ingredient_id)
